@@ -7,24 +7,28 @@ st.set_page_config(
     page_title="Ramrup Satpati | রামরূপ সাতপতি",
     page_icon="🔥",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"
 )
 
 # Knight Red / Fiery Obsidian Visual Styling & Animated Flame Canvas Component
 st.markdown("""
 <style>
-    /* Global Page Styling — Knight Crimson & Obsidian Background */
-    .stApp {
-        background: linear-gradient(135deg, #180305 0%, #2b060a 40%, #450a10 75%, #110203 100%) !important;
-        color: #fef2f2 !important;
-        font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    /* Completely hide Streamlit Sidebar */
+    [data-testid="stSidebar"], section[data-testid="stSidebar"] {
+        display: none !important;
+    }
+    [data-testid="collapsedControl"] {
+        display: none !important;
     }
 
-    /* Sidebar Styling */
-    section[data-testid="stSidebar"] {
-        background: rgba(24, 3, 5, 0.85) !important;
-        border-right: 1px solid rgba(239, 68, 68, 0.25) !important;
-        backdrop-filter: blur(16px);
+    /* Global Page Styling — Knight with Crimson Flame Ambience */
+    .stApp {
+        background: 
+            radial-gradient(circle at 50% 15%, rgba(239, 68, 68, 0.22) 0%, transparent 60%),
+            linear-gradient(180deg, rgba(17, 2, 3, 0.88) 0%, rgba(30, 6, 10, 0.94) 50%, rgba(10, 1, 2, 0.98) 100%),
+            url('https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1920&q=80') center center / cover no-repeat fixed !important;
+        color: #fef2f2 !important;
+        font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
     }
 
     /* Fiery Glowing Banner & Text Headers */
@@ -50,49 +54,74 @@ st.markdown("""
     }
 
     .hero-subtext {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
         font-weight: 700;
         color: #fca5a5;
         letter-spacing: 1px;
         text-transform: uppercase;
         border-left: 4px solid #ef4444;
         padding-left: 14px;
-        margin-bottom: 28px;
+        margin-bottom: 24px;
+    }
+
+    /* Top Social Connect Bar */
+    .connect-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 35px;
+    }
+    .connect-chip {
+        display: inline-flex;
+        align-items: center;
+        background: rgba(30, 7, 10, 0.7);
+        border: 1px solid rgba(239, 68, 68, 0.35);
+        border-radius: 9999px;
+        padding: 6px 16px;
+        font-size: 0.88rem;
+        color: #fca5a5;
+        text-decoration: none;
+        transition: all 0.25s ease;
+    }
+    .connect-chip:hover {
+        background: rgba(239, 68, 68, 0.25);
+        border-color: #f87171;
+        color: #ffffff;
+        transform: translateY(-2px);
     }
 
     /* Glassmorphism Cards with Glowing Ember Borders */
     .knight-card {
-        background: rgba(30, 7, 10, 0.75);
+        background: rgba(26, 5, 8, 0.82);
         backdrop-filter: blur(18px);
         -webkit-backdrop-filter: blur(18px);
-        border: 1px solid rgba(239, 68, 68, 0.28);
-        border-radius: 20px;
-        padding: 24px;
-        margin-bottom: 20px;
-        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        border-radius: 18px;
+        padding: 22px;
+        margin-bottom: 18px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
         transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
     .knight-card:hover {
-        transform: translateY(-5px);
-        border-color: rgba(248, 113, 113, 0.6);
-        box-shadow: 0 18px 45px rgba(239, 68, 68, 0.25);
+        transform: translateY(-4px);
+        border-color: rgba(248, 113, 113, 0.65);
+        box-shadow: 0 14px 40px rgba(239, 68, 68, 0.25);
     }
 
     /* Badge Pills */
     .pill-badge {
         display: inline-block;
-        padding: 5px 14px;
+        padding: 4px 12px;
         border-radius: 50rem;
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         font-weight: 700;
         letter-spacing: 0.5px;
         margin-right: 8px;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
         text-transform: uppercase;
     }
     .pill-python { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
     .pill-rust { background: rgba(249, 115, 22, 0.2); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.4); }
-    .pill-vue { background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.4); }
     .pill-gpl { background: rgba(234, 179, 8, 0.2); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.4); }
 
     /* Action Links */
@@ -107,26 +136,20 @@ st.markdown("""
         text-decoration: underline;
     }
 
-    /* Custom Streamlit Tabs Styling */
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 12px;
-        border-bottom: 1px solid rgba(239, 68, 68, 0.25);
+    /* Section Header */
+    .section-header {
+        font-size: 2.1rem;
+        font-weight: 800;
+        color: #fef2f2;
+        letter-spacing: -0.5px;
+        margin-top: 10px;
+        margin-bottom: 6px;
     }
-    .stTabs [data-baseweb="tab"] {
-        height: 50px;
-        white-space: pre-wrap;
-        background-color: rgba(30, 7, 10, 0.6);
-        border-radius: 12px 12px 0 0;
-        gap: 8px;
-        padding: 10px 24px;
+    .section-sub {
         color: #fca5a5;
-        font-weight: 700;
-        border: 1px solid rgba(239, 68, 68, 0.2);
-    }
-    .stTabs [aria-selected="true"] {
-        background-color: rgba(239, 68, 68, 0.25) !important;
-        color: #ffffff !important;
-        border-color: #ef4444 !important;
+        font-size: 1.05rem;
+        font-weight: 600;
+        margin-bottom: 24px;
     }
 </style>
 
@@ -161,18 +184,18 @@ st.markdown("""
 
             reset() {
                 this.x = Math.random() * width;
-                this.y = height + Math.random() * 100;
-                this.vy = -(Math.random() * 1.8 + 0.8);
+                this.y = height + Math.random() * 80;
+                this.vy = -(Math.random() * 1.9 + 0.8);
                 this.vx = (Math.random() - 0.5) * 0.8;
                 this.size = Math.random() * 3.5 + 1;
                 this.alpha = Math.random() * 0.7 + 0.3;
-                this.hue = Math.random() * 35; // Red to Orange-Yellow sparks
+                this.hue = Math.random() * 38; // Deep Red to Fiery Yellow-Amber
             }
 
             update() {
                 this.y += this.vy;
                 this.x += this.vx + Math.sin(this.y * 0.02) * 0.4;
-                this.alpha -= 0.003;
+                this.alpha -= 0.0032;
                 if (this.y < -20 || this.alpha <= 0) {
                     this.reset();
                 }
@@ -184,13 +207,13 @@ st.markdown("""
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fillStyle = `hsla(${this.hue}, 100%, 60%, ${this.alpha})`;
                 ctx.shadowBlur = 10;
-                ctx.shadowColor = `hsla(${this.hue}, 100%, 50%, 0.8)`;
+                ctx.shadowColor = `hsla(${this.hue}, 100%, 50%, 0.85)`;
                 ctx.fill();
                 ctx.restore();
             }
         }
 
-        const embers = Array.from({ length: 55 }, () => new Ember());
+        const embers = Array.from({ length: 65 }, () => new Ember());
 
         function animate() {
             ctx.clearRect(0, 0, width, height);
@@ -206,205 +229,166 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # -----------------------------------------------------------------------------
-# 2. Sidebar Profile & Developer Links
-# -----------------------------------------------------------------------------
-with st.sidebar:
-    st.markdown("""
-    <div style="text-align: center; padding: 12px 0;">
-        <h2 style="color: #f87171; font-weight: 800; margin-bottom: 2px;">Ramrup Satpati</h2>
-        <p style="color: #fb923c; font-weight: 700; font-size: 1.2rem; margin: 0;">রামরূপ সাতপতি</p>
-        <p style="color: #fca5a5; font-size: 0.85rem; margin-top: 4px;">RSNPIIT &bull; he/him</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.caption("🔥 Tech Generalist | Full Stack • AI/ML • Cybersecurity • UI/UX | Student @ IIT Madras")
-
-    st.markdown("---")
-
-    st.markdown("### 📊 Metrics & Activity")
-    st.metric(label="GitHub Contributions (Past Year)", value="773+")
-    st.metric(label="IIT Madras CGPA", value="10.0 (Grade S)")
-
-    st.markdown("---")
-
-    st.markdown("### 🌐 Profiles & Connect")
-    st.markdown("• **Personal GitHub**: [RSNPIIT](https://github.com/RSNPIIT)")
-    st.markdown("• **Institute GitHub**: [24f3004027](https://github.com/24f3004027)")
-    st.markdown("• **LinkedIn**: [Ramrup Satpati](https://www.linkedin.com/in/ramrup-satpati-683970341)")
-    st.markdown("• **Email**: [ramrupsatpati@gmail.com](mailto:ramrupsatpati@gmail.com)")
-    st.markdown("• **Location**: Jamshedpur, Jharkhand")
-
-# -----------------------------------------------------------------------------
-# 3. Main Hero Banner
+# 2. Hero Section & Quick Links (Integrated Top Bar)
 # -----------------------------------------------------------------------------
 st.markdown("""
 <div>
     <div class="hero-title">RAMRUP SATPATI</div>
     <div class="hero-bengali">রামরূপ সাতপতি</div>
-    <div class="hero-subtext">Jack of all Trades</div>
+    <div class="hero-subtext">Jack of all Trades &bull; RSNPIIT</div>
+</div>
+
+<div class="connect-bar">
+    <a href="https://github.com/RSNPIIT" target="_blank" class="connect-chip">🐙 GitHub: RSNPIIT</a>
+    <a href="https://github.com/24f3004027" target="_blank" class="connect-chip">💻 Work Repos: 24f3004027</a>
+    <a href="https://www.linkedin.com/in/ramrup-satpati-683970341" target="_blank" class="connect-chip">💼 LinkedIn</a>
+    <a href="mailto:ramrupsatpati@gmail.com" class="connect-chip">✉️ Contact Email</a>
 </div>
 """, unsafe_allow_html=True)
 
 # -----------------------------------------------------------------------------
-# 4. Project Showcase Cards (Python, Rust, Vue.js)
+# 3. My Works Section
 # -----------------------------------------------------------------------------
-st.markdown("## ⚔️ Code Repositories & Collections")
-st.caption("Embracing Eric S. Raymond's **Bazaar Philosophy of Open Source** — living collections of ideas, tools, and platforms.")
+st.markdown('<div class="section-header">⚔️ My Works</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-sub">_< Exploring systems, automation, distributed architectures, and machine learning</div>', unsafe_allow_html=True)
 
-tab_python, tab_rust, tab_vue = st.tabs([
-    "🐍 Python Projects",
-    "🦀 Rust Projects",
-    "⚡ Vue Projects"
-])
+col_python, col_rust = st.columns([1.1, 0.9], gap="large")
 
-# TAB 1: PYTHON PROJECTS
-with tab_python:
+# LEFT COLUMN: PYTHON PROJECTS
+with col_python:
+    st.markdown("""
+    <h3 style="color: #f87171; border-bottom: 2px solid rgba(239, 68, 68, 0.4); padding-bottom: 8px; margin-bottom: 18px;">
+        🐍 Python Projects
+    </h3>
+    """, unsafe_allow_html=True)
+
+    # 1. Python Projects Repo
     st.markdown("""
     <div class="knight-card">
-        <span class="pill-badge pill-python">Personal Monorepo Collection</span>
+        <span class="pill-badge pill-python">Monorepo Collection</span>
         <span class="pill-badge pill-gpl">GNU GPLv3</span>
-        <h3 style="color: #f87171; margin-top: 6px;">🐍 Python-Projects</h3>
-        <p style="color: #fca5a5;">
-            A culmination of Python projects and mini-projects built over time across Artificial Intelligence, Machine Learning, Deep Learning, NLP, and Cybersecurity.
+        <h4 style="margin: 6px 0 8px 0; color: #f87171;">🐍 Python Projects Repo</h4>
+        <p style="color: #fca5a5; font-size: 0.9rem; margin-bottom: 10px;">
+            A centralized monorepo of Python systems and mini-projects spanning Artificial Intelligence, Machine Learning, Deep Learning, NLP, and Cybersecurity.
         </p>
-        <p>🔗 <b>Repository</b>: <a href="https://github.com/RSNPIIT/Python-Projects" target="_blank" class="repo-link">https://github.com/RSNPIIT/Python-Projects</a></p>
+        <p style="margin-bottom: 0;">
+            🔗 <a href="https://github.com/RSNPIIT/Python-Projects" target="_blank" class="repo-link">github.com/RSNPIIT/Python-Projects</a>
+        </p>
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown("#### 🎓 Featured Python Systems & IIT Madras Academic Repositories")
+    # 2. HMS Repo
+    st.markdown("""
+    <div class="knight-card">
+        <span class="pill-badge pill-python">Healthcare Architecture</span>
+        <span class="pill-badge pill-gpl">GNU GPLv3</span>
+        <h4 style="margin: 6px 0 8px 0; color: #f87171;">🏥 HMS Repo (PulseCare HMS v2.0)</h4>
+        <p style="color: #fca5a5; font-size: 0.9rem; margin-bottom: 10px;">
+            Full-stack Flask, SQLAlchemy & Flask-Login healthcare platform featuring Admin panels, Doctor clinical care notes, and Patient appointments.
+        </p>
+        <p style="margin-bottom: 0;">
+            🌐 <a href="https://24f3004027.github.io/HMS-MAD-Projectv1/" target="_blank" class="repo-link">Live Showcase</a> &bull; 
+            💻 <a href="https://github.com/24f3004027/HMS-MAD-Projectv1" target="_blank" class="repo-link">HMS Repo</a>
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
-    col_p1, col_p2 = st.columns(2)
+    # 3. Placement Portal Repo
+    st.markdown("""
+    <div class="knight-card">
+        <span class="pill-badge pill-python">Full-Stack Application</span>
+        <h4 style="margin: 6px 0 8px 0; color: #f87171;">📋 Placement Portal Repo</h4>
+        <p style="color: #fca5a5; font-size: 0.9rem; margin-bottom: 10px;">
+            Comprehensive placement automation application managing student applications, recruiter drives, interview scheduling, and offer status pipelines.
+        </p>
+        <p style="margin-bottom: 0;">
+            💻 <a href="https://github.com/24f3004027/Placement_Portal_Application_V2" target="_blank" class="repo-link">Placement Portal Repo</a>
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
-    with col_p1:
-        st.markdown("""
-        <div class="knight-card">
-            <span class="pill-badge pill-python">Full-Stack Web App</span>
-            <span class="pill-badge pill-gpl">GNU GPLv3</span>
-            <h4>🏥 PulseCare HMS (Hospital Management System v2.0)</h4>
-            <p style="color: #fca5a5; font-size: 0.9rem;">
-                Full-stack Flask, SQLAlchemy & Flask-Login healthcare platform featuring Admin controls, Doctor clinical care notes, Patient booking, and 3D Medical Plus canvas effects.
-            </p>
-            <p>
-                🌐 <a href="https://24f3004027.github.io/HMS-MAD-Projectv1/" target="_blank" class="repo-link">Live Showcase</a> &bull; 
-                💻 <a href="https://github.com/24f3004027/HMS-MAD-Projectv1" target="_blank" class="repo-link">HMS Repo</a>
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
+    # 4. Vehicle Parking Repo
+    st.markdown("""
+    <div class="knight-card">
+        <span class="pill-badge pill-python">Smart Management</span>
+        <h4 style="margin: 6px 0 8px 0; color: #f87171;">🚗 Vehicle Parking Repo</h4>
+        <p style="color: #fca5a5; font-size: 0.9rem; margin-bottom: 10px;">
+            ParkSmart vehicle parking reservation system featuring automated parking slot allocations, availability tracking, and admin dashboard metrics.
+        </p>
+        <p style="margin-bottom: 0;">
+            💻 <a href="https://github.com/24f3004027/vehicle-parking-appv1" target="_blank" class="repo-link">Vehicle Parking Repo</a>
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
-        st.markdown("""
-        <div class="knight-card">
-            <span class="pill-badge pill-python">Vehicle Parking Platform</span>
-            <h4>🚗 ParkSmart Vehicle Parking App</h4>
-            <p style="color: #fca5a5; font-size: 0.9rem;">
-                Smart parking space management web application with automated slot reservation, real-time availability tracking, and admin controls.
-            </p>
-            <p>
-                💻 <a href="https://github.com/24f3004027/vehicle-parking-appv1" target="_blank" class="repo-link">Vehicle Parking App Repo</a>
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
+    # 5. DL GenAI Project Repo
+    st.markdown("""
+    <div class="knight-card">
+        <span class="pill-badge pill-python">PyTorch &bull; GenAI</span>
+        <h4 style="margin: 6px 0 8px 0; color: #f87171;">🧠 DL GenAI Project Repo (Smart MCQ Solver)</h4>
+        <p style="color: #fca5a5; font-size: 0.9rem; margin-bottom: 10px;">
+            PyTorch BiGRU with Multi-Head Self-Attention and 10-Seed Ensembling designed for context-augmented multiple choice question-answering.
+        </p>
+        <p style="margin-bottom: 0;">
+            🌐 <a href="https://24f3004027.github.io/Deep_Learning_Project/" target="_blank" class="repo-link">Live Site</a> &bull; 
+            💻 <a href="https://github.com/24f3004027/Deep_Learning_Project" target="_blank" class="repo-link">DL GenAI Repo</a>
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
-        st.markdown("""
-        <div class="knight-card">
-            <span class="pill-badge pill-python">Full-Stack Portal</span>
-            <h4>📋 Placement Portal Application V2</h4>
-            <p style="color: #fca5a5; font-size: 0.9rem;">
-                Full-stack academic placement portal application automating student job applications, recruiter drives, interview scheduling, and offer tracking.
-            </p>
-            <p>
-                💻 <a href="https://github.com/24f3004027/Placement_Portal_Application_V2" target="_blank" class="repo-link">Placement Portal Repo</a>
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
+    # 6. MLP Project Repo
+    st.markdown("""
+    <div class="knight-card">
+        <span class="pill-badge pill-python">Gradient Boosting</span>
+        <h4 style="margin: 6px 0 8px 0; color: #f87171;">🚜 MLP Project Repo (Price Prediction)</h4>
+        <p style="color: #fca5a5; font-size: 0.9rem; margin-bottom: 10px;">
+            End-to-end 5-Seed Gradient Boosting regression pipeline with extensive feature engineering for heavy equipment price estimation (RMSLE 0.1866).
+        </p>
+        <p style="margin-bottom: 0;">
+            💻 <a href="https://github.com/24f3004027/MLP_Project" target="_blank" class="repo-link">MLP Project Repo</a>
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
-    with col_p2:
-        st.markdown("""
-        <div class="knight-card">
-            <span class="pill-badge pill-python">Grade S &bull; 10.0 CGPA</span>
-            <span class="pill-badge pill-python">Rank 60 (+264 Jump)</span>
-            <h4>🧠 Deep Learning & GenAI — Smart MCQ Solver</h4>
-            <p style="color: #fca5a5; font-size: 0.9rem;">
-                PyTorch BiGRU with Multi-Head Self-Attention & 10-Seed Ensembling for Context-Augmented QA. Score: 91.00/100.
-            </p>
-            <p>
-                🌐 <a href="https://24f3004027.github.io/Deep_Learning_Project/" target="_blank" class="repo-link">Live Site</a> &bull; 
-                💻 <a href="https://github.com/24f3004027/Deep_Learning_Project" target="_blank" class="repo-link">DL Repo</a>
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
+# RIGHT COLUMN: RUST PROJECTS
+with col_rust:
+    st.markdown("""
+    <h3 style="color: #fb923c; border-bottom: 2px solid rgba(249, 115, 22, 0.4); padding-bottom: 8px; margin-bottom: 18px;">
+        🦀 Rust Projects
+    </h3>
+    """, unsafe_allow_html=True)
 
-        st.markdown("""
-        <div class="knight-card">
-            <span class="pill-badge pill-python">Grade S &bull; 10.0 CGPA</span>
-            <span class="pill-badge pill-python">RMSLE 0.1866</span>
-            <h4>🚜 Machine Learning Practice — Price Prediction</h4>
-            <p style="color: #fca5a5; font-size: 0.9rem;">
-                End-to-end 5-Seed Gradient Boosting regression pipeline with automated feature engineering for heavy equipment price estimation. Score: 90.00/100.
-            </p>
-            <p>
-                💻 <a href="https://github.com/24f3004027/MLP_Project" target="_blank" class="repo-link">MLP Repo</a>
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
-
-# TAB 2: RUST PROJECTS
-with tab_rust:
     st.markdown("""
     <div class="knight-card">
         <span class="pill-badge pill-rust">Systems Programming</span>
-        <h3 style="color: #fb923c; margin-top: 6px;">🦀 Rust-Projects</h3>
-        <p style="color: #fca5a5;">
-            My Rust learning journey and experiments in memory safety, zero-cost abstractions, lifetimes, cargo tools, and low-level system performance.
+        <h4 style="margin: 6px 0 8px 0; color: #fb923c;">🦀 Rust-Projects</h4>
+        <p style="color: #fca5a5; font-size: 0.9rem; margin-bottom: 12px;">
+            Explorations in low-level systems programming, memory safety without garbage collection, zero-cost abstractions, lifetimes, CLI utilities, and high-concurrency tooling.
         </p>
-        <p>🔗 <b>Repository</b>: <a href="https://github.com/RSNPIIT/Rust-Projects" target="_blank" class="repo-link" style="color: #fb923c;">https://github.com/RSNPIIT/Rust-Projects</a></p>
+        <p style="margin-bottom: 0;">
+            🔗 <b>Repository</b>: <a href="https://github.com/RSNPIIT/Rust-Projects" target="_blank" class="repo-link" style="color: #fb923c;">github.com/RSNPIIT/Rust-Projects</a>
+        </p>
     </div>
     """, unsafe_allow_html=True)
 
-# TAB 3: VUE PROJECTS
-with tab_vue:
+    # Growth & Horizons Card
     st.markdown("""
-    <div class="knight-card">
-        <span class="pill-badge pill-vue">Frontend Engineering</span>
-        <h3 style="color: #4ade80; margin-top: 6px;">⚡ Vue-Projects</h3>
-        <p style="color: #fca5a5;">
-            This repository is about my work in Vue.js as I continue to build reactive web applications, single-file components, and modern glassmorphic user interfaces.
-        </p>
-        <p>🔗 <b>Repository</b>: <a href="https://github.com/RSNPIIT/Vue-Projects" target="_blank" class="repo-link" style="color: #4ade80;">https://github.com/RSNPIIT/Vue-Projects</a></p>
-    </div>
-    """, unsafe_allow_html=True)
-
-# -----------------------------------------------------------------------------
-# 5. Future Horizons & Down-Right Section
-# -----------------------------------------------------------------------------
-st.markdown("<br>", unsafe_allow_html=True)
-
-col_left, col_right = st.columns([1, 1])
-
-with col_left:
-    st.markdown("""
-    <div class="knight-card">
-        <h4>🔥 Growth Mindset & Philosophy</h4>
-        <blockquote style="border-left: 3px solid #ef4444; padding-left: 12px; color: #fca5a5; font-style: italic;">
-            "My imperfections are a part of me — growth comes from building, failing fast, iterating, and sharing openly with the world."
+    <div class="knight-card" style="border-color: rgba(245, 158, 11, 0.4); background: rgba(45, 10, 14, 0.85); margin-top: 24px;">
+        <h4 style="color: #fbbf24; margin-top: 0;">🚀 Future Horizons</h4>
+        <blockquote style="border-left: 3px solid #ef4444; padding-left: 12px; color: #fca5a5; font-style: italic; margin: 12px 0;">
+            "Growth comes from building, iterating, and sharing openly with the world."
         </blockquote>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col_right:
-    st.markdown("""
-    <div class="knight-card" style="border-color: rgba(245, 158, 11, 0.4); background: rgba(45, 10, 14, 0.85);">
-        <h4 style="color: #fbbf24;">🚀 Future Horizons</h4>
-        <p style="font-size: 1.35rem; font-weight: 800; color: #fef2f2; margin-bottom: 8px;">
+        <p style="font-size: 1.25rem; font-weight: 800; color: #fef2f2; margin-bottom: 4px;">
             Learning much more and <br><span style="color: #fbbf24;">A lot more to come...</span>
         </p>
-        <p style="color: #fca5a5; font-weight: 700; font-style: italic;">
+        <p style="color: #fca5a5; font-weight: 700; font-style: italic; margin: 0;">
             .. stay tuned 🔥
         </p>
     </div>
     """, unsafe_allow_html=True)
 
 # -----------------------------------------------------------------------------
-# 6. Footer Notice
+# 4. Footer Notice
 # -----------------------------------------------------------------------------
 st.markdown("---")
 st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 0.85rem;'>RAMRUP SATPATI (রামরূপ সাতপতি) &bull; Released under GNU General Public License v3.0 (GNU GPLv3) &copy; 2026.</p>", unsafe_allow_html=True)
