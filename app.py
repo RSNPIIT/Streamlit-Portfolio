@@ -5,22 +5,22 @@ import streamlit.components.v1 as components
 # 1. Page Configuration
 # -----------------------------------------------------------------------------
 st.set_page_config(
-    page_title="Ramrup Satpati | রামরূপ সাতপতি",
+    page_title="Ramrup Satpati | Ultra-Premium Portfolio",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
 # -----------------------------------------------------------------------------
-# 2. Global Page CSS (Clean Dark Styling & Tab Customizations)
+# 2. Global Styling Injection
 # -----------------------------------------------------------------------------
 st.markdown("""
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Hind+Siliguri:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-/* Hide Streamlit Sidebar & Header */
+/* Hide Default Streamlit Chrome */
 [data-testid="stSidebar"], section[data-testid="stSidebar"], [data-testid="collapsedControl"] {
     display: none !important;
 }
@@ -28,21 +28,20 @@ header[data-testid="stHeader"] {
     background: transparent !important;
 }
 .block-container {
-    padding-top: 0.5rem !important;
+    padding-top: 0rem !important;
     padding-bottom: 3rem !important;
-    max-width: 1240px !important;
+    max-width: 1280px !important;
 }
 
 :root {
-    --bg-dark: #060b17;
-    --card-glass: rgba(10, 18, 36, 0.85);
-    --border-glass: rgba(56, 189, 248, 0.25);
+    --bg-dark: #070a13;
+    --card-glass: rgba(13, 19, 36, 0.85);
+    --border-glass: rgba(56, 189, 248, 0.22);
     --border-hover: rgba(56, 189, 248, 0.65);
     --accent-cyan: #38bdf8;
-    --accent-blue: #0284c7;
-    --accent-rose: #f43f5e;
-    --accent-amber: #f59e0b;
+    --accent-yellow: #facc15;
     --accent-emerald: #10b981;
+    --accent-rose: #f43f5e;
 }
 
 body, .stApp {
@@ -54,15 +53,15 @@ body, .stApp {
 /* SECTION HEADER */
 .section-header {
     text-align: center !important;
-    margin-top: 15px;
-    margin-bottom: 25px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 .section-title {
-    font-size: 2.3rem;
+    font-size: 2.5rem;
     font-weight: 800;
     color: #ffffff;
-    margin-bottom: 6px;
     letter-spacing: -0.5px;
+    margin-bottom: 6px;
 }
 .section-desc {
     color: #94a3b8;
@@ -73,11 +72,11 @@ body, .stApp {
 .stTabs [data-baseweb="tab-list"] {
     justify-content: center !important;
     gap: 12px;
-    background: rgba(10, 18, 36, 0.75);
+    background: rgba(13, 19, 36, 0.75);
     padding: 8px;
     border-radius: 16px;
     border: 1px solid var(--border-glass);
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 .stTabs [data-baseweb="tab"] {
     height: 48px;
@@ -85,7 +84,7 @@ body, .stApp {
     color: #94a3b8;
     font-weight: 700;
     font-size: 0.98rem;
-    padding: 0 26px;
+    padding: 0 28px;
 }
 .stTabs [aria-selected="true"] {
     background: linear-gradient(135deg, #0284c7, #06b6d4) !important;
@@ -99,30 +98,30 @@ body, .stApp {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--border-glass);
-    border-radius: 20px;
-    padding: 24px;
-    margin-bottom: 22px;
+    border-radius: 22px;
+    padding: 26px;
+    margin-bottom: 24px;
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     text-align: left;
 }
 .glass-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-6px);
     border-color: var(--border-hover);
-    box-shadow: 0 25px 50px rgba(56, 189, 248, 0.25);
+    box-shadow: 0 25px 50px rgba(56, 189, 248, 0.28);
 }
 
 .pill-badge {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 5px 13px;
+    padding: 5px 14px;
     border-radius: 30px;
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.5px;
     margin-right: 6px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     text-transform: uppercase;
 }
 .pill-cyan { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
@@ -144,29 +143,91 @@ body, .stApp {
 """, unsafe_allow_html=True)
 
 # -----------------------------------------------------------------------------
-# 3. 3D WebGL Cityscape Interactive Hero (Full Canvas + Centered Banner)
+# 3. Ultra-Premium 3D Interactive Hero Component (YouTube Tutorial Inspired)
 # -----------------------------------------------------------------------------
 hero_component_html = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hero 3D Cityscape</title>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <title>3D Ultra-Premium Hero</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Hind+Siliguri:wght@600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background-color: #060b17;
+            background-color: #070a13;
             color: #f8fafc;
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow: hidden;
             width: 100vw;
-            height: 520px;
+            height: 620px;
             position: relative;
         }
 
-        #cityscape-canvas {
+        /* Top Navbar */
+        .top-navbar {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            padding: 0 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 20;
+        }
+        .nav-email {
+            font-size: 0.88rem;
+            color: #94a3b8;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        .nav-link-item {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        .nav-link-item:hover {
+            color: #38bdf8;
+        }
+
+        /* Far Left Floating Social Sidebar */
+        .social-sidebar {
+            position: absolute;
+            left: 35px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            z-index: 20;
+        }
+        .social-icon-btn {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        .social-icon-btn:hover {
+            color: #38bdf8;
+            transform: translateX(4px);
+        }
+
+        /* 3D WebGL Canvas */
+        #webgl-canvas {
             position: absolute;
             top: 0;
             left: 0;
@@ -175,249 +236,272 @@ hero_component_html = """
             z-index: 1;
         }
 
-        /* Gradient Mask to Fade Canvas into Page Body */
+        /* Center Glow Halo */
+        .center-halo {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 480px;
+            height: 480px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.28) 0%, rgba(2, 132, 199, 0.12) 45%, transparent 70%);
+            z-index: 2;
+            pointer-events: none;
+            filter: blur(20px);
+        }
+
+        /* Hero Content Grid (Left & Right Text Columns) */
+        .hero-layout {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: 1fr 340px 1fr;
+            align-items: center;
+            padding: 0 70px;
+        }
+
+        /* Left Content Column */
+        .left-col {
+            text-align: right;
+            padding-right: 30px;
+        }
+        .small-tag {
+            color: #38bdf8;
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .main-name {
+            font-size: 3.2rem;
+            font-weight: 900;
+            line-height: 1.05;
+            color: #ffffff;
+            letter-spacing: -1px;
+            margin-bottom: 4px;
+        }
+        .bengali-name {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #fb923c;
+            font-family: 'Hind Siliguri', sans-serif;
+            text-shadow: 0 0 20px rgba(251, 146, 60, 0.4);
+        }
+
+        /* Right Content Column */
+        .right-col {
+            text-align: left;
+            padding-left: 30px;
+        }
+        .role-tag {
+            color: #94a3b8;
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .role-highlight {
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #38bdf8, #06b6d4, #f43f5e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+        }
+        .sub-tagline {
+            color: #e2e8f0;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Bottom Giant Typography Composition */
+        .bottom-banner {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 20px;
+            z-index: 15;
+            pointer-events: none;
+        }
+        .script-yellow-left {
+            font-family: 'Caveat', cursive;
+            font-size: 3.2rem;
+            color: #facc15;
+            transform: rotate(-6deg);
+            text-shadow: 0 0 15px rgba(250, 204, 21, 0.4);
+        }
+        .giant-portfolio-text {
+            font-size: 5.5rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: #ffffff;
+            text-transform: uppercase;
+            text-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(56, 189, 248, 0.3);
+        }
+        .script-yellow-right {
+            font-family: 'Caveat', cursive;
+            font-size: 3.2rem;
+            color: #facc15;
+            transform: rotate(6deg);
+            text-shadow: 0 0 15px rgba(250, 204, 21, 0.4);
+        }
+
+        /* Bottom Gradient Fade */
         .bottom-fade {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 120px;
-            background: linear-gradient(to bottom, transparent 0%, #060b17 100%);
-            z-index: 2;
+            height: 140px;
+            background: linear-gradient(to bottom, transparent 0%, #070a13 100%);
+            z-index: 3;
             pointer-events: none;
-        }
-
-        /* Overlay Content Container */
-        .hero-overlay {
-            position: relative;
-            z-index: 10;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .hero-badge {
-            background: rgba(10, 18, 36, 0.75);
-            border: 1px solid rgba(56, 189, 248, 0.45);
-            color: #38bdf8;
-            font-weight: 700;
-            padding: 8px 24px;
-            border-radius: 30px;
-            font-size: 0.88rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 16px;
-            backdrop-filter: blur(16px);
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
-            animation: pulseGlow 3s infinite alternate;
-        }
-
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 15px rgba(56, 189, 248, 0.2); }
-            100% { box-shadow: 0 0 35px rgba(56, 189, 248, 0.55); }
-        }
-
-        .hero-title {
-            font-size: 4.2rem;
-            font-weight: 800;
-            letter-spacing: -1.5px;
-            line-height: 1.05;
-            background: linear-gradient(135deg, #ffffff 0%, #38bdf8 35%, #06b6d4 70%, #f43f5e 100%);
-            background-size: 200% 200%;
-            animation: gradientShift 6s ease infinite;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 6px;
-            filter: drop-shadow(0 0 30px rgba(56, 189, 248, 0.35));
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .hero-bengali {
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: #fb923c;
-            text-shadow: 0 0 25px rgba(251, 146, 60, 0.5);
-            margin-bottom: 10px;
-            font-family: 'Hind Siliguri', sans-serif;
-        }
-
-        .hero-subtext {
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: #cbd5e1;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 24px;
-            border: none;
-            padding: 0;
-        }
-
-        .connect-bar {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        .connect-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(10, 18, 36, 0.85);
-            border: 1px solid rgba(56, 189, 248, 0.4);
-            border-radius: 9999px;
-            padding: 9px 22px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #38bdf8;
-            text-decoration: none;
-            backdrop-filter: blur(12px);
-            transition: all 0.3s ease;
-        }
-
-        .connect-chip:hover {
-            background: rgba(56, 189, 248, 0.25);
-            border-color: #38bdf8;
-            color: #ffffff;
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.35);
         }
     </style>
 </head>
 <body>
 
-    <canvas id="cityscape-canvas"></canvas>
-    <div class="bottom-fade"></div>
-
-    <div class="hero-overlay">
-        <div class="hero-badge">
-            ✨ Full-Stack Systems, AI/ML & CyberSec Engineer
-        </div>
-        <div class="hero-title">RAMRUP SATPATI</div>
-        <div class="hero-bengali">রামরূপ সাতপতি</div>
-        <div class="hero-subtext">JACK OF ALL TRADES &bull; RSNPIIT</div>
-
-        <div class="connect-bar">
-            <a href="https://github.com/RSNPIIT" target="_blank" class="connect-chip">
-                🐙 GitHub: RSNPIIT
-            </a>
-            <a href="https://github.com/24f3004027" target="_blank" class="connect-chip">
-                💻 IITM Repos: 24f3004027
-            </a>
-            <a href="https://www.linkedin.com/in/ramrup-satpati-683970341" target="_blank" class="connect-chip">
-                💼 LinkedIn Profile
-            </a>
-            <a href="mailto:ramrupsatpati@gmail.com" class="connect-chip">
-                ✉️ Email Contact
-            </a>
+    <!-- Top Navbar -->
+    <div class="top-navbar">
+        <div class="nav-email">ramrupsatpati@gmail.com</div>
+        <div class="nav-links">
+            <a href="#about" class="nav-link-item">ABOUT</a>
+            <a href="#work" class="nav-link-item">WORK</a>
+            <a href="#repos" class="nav-link-item">REPOSITORIES</a>
+            <a href="mailto:ramrupsatpati@gmail.com" class="nav-link-item">CONTACT</a>
         </div>
     </div>
 
+    <!-- Vertical Social Bar -->
+    <div class="social-sidebar">
+        <a href="https://github.com/RSNPIIT" target="_blank" class="social-icon-btn">🐙 GitHub</a>
+        <a href="https://github.com/24f3004027" target="_blank" class="social-icon-btn">💻 IITM</a>
+        <a href="https://www.linkedin.com/in/ramrup-satpati-683970341" target="_blank" class="social-icon-btn">💼 LinkedIn</a>
+    </div>
+
+    <!-- WebGL Canvas & Glow -->
+    <canvas id="webgl-canvas"></canvas>
+    <div class="center-halo"></div>
+    <div class="bottom-fade"></div>
+
+    <!-- Hero Content Layout -->
+    <div class="hero-layout">
+        <!-- Left Column -->
+        <div class="left-col">
+            <div class="small-tag">Hello! I'm</div>
+            <div class="main-name">RAMRUP<br>SATPATI</div>
+            <div class="bengali-name">রামরূপ সাতপতি</div>
+        </div>
+
+        <!-- Center 3D Space (Canvas renders behind this gap) -->
+        <div></div>
+
+        <!-- Right Column -->
+        <div class="right-col">
+            <div class="role-tag">A Full Stack</div>
+            <div class="role-highlight">SYSTEMS & AI<br>ENGINEER</div>
+            <div class="sub-tagline">Jack of all Trades</div>
+        </div>
+    </div>
+
+    <!-- Bottom Giant Typography -->
+    <div class="bottom-banner">
+        <span class="script-yellow-left">Jack of all Trades</span>
+        <span class="giant-portfolio-text">PORTFOLIO</span>
+        <span class="script-yellow-right">RSNPIIT</span>
+    </div>
+
+    <!-- Three.js 3D Cyber Core Animation -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const canvas = document.getElementById('cityscape-canvas');
+            const canvas = document.getElementById('webgl-canvas');
             const scene = new THREE.Scene();
-            scene.fog = new THREE.FogExp2(0x060b17, 0.007);
 
-            const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 1, 1000);
-            camera.position.set(0, 42, 140);
-            camera.lookAt(0, 10, -50);
+            const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 0, 14);
 
             const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
             // Lighting
-            const ambient = new THREE.AmbientLight(0x0f172a, 2.4);
+            const ambient = new THREE.AmbientLight(0x0f172a, 2.0);
             scene.add(ambient);
 
-            const dirLight = new THREE.DirectionalLight(0x38bdf8, 1.6);
-            dirLight.position.set(60, 100, 50);
-            scene.add(dirLight);
+            const cyanLight = new THREE.PointLight(0x38bdf8, 3, 50);
+            cyanLight.position.set(5, 5, 10);
+            scene.add(cyanLight);
 
-            // Ground Grid Matrix
-            const grid = new THREE.GridHelper(500, 45, 0x0284c7, 0x0f2942);
-            grid.position.y = -0.5;
-            scene.add(grid);
+            const roseLight = new THREE.PointLight(0xf43f5e, 3, 50);
+            roseLight.position.set(-5, -5, 10);
+            scene.add(roseLight);
 
-            // 1. 3D City Buildings
-            const buildingGroup = new THREE.Group();
-            const bldgMat = new THREE.MeshPhongMaterial({
-                color: 0x0b182d,
+            // 3D Core Sphere with Icosahedron Wireframe Outer Shell
+            const coreGroup = new THREE.Group();
+
+            // Inner Glowing Sphere
+            const innerGeo = new THREE.SphereGeometry(2.8, 32, 32);
+            const innerMat = new THREE.MeshPhongMaterial({
+                color: 0x0284c7,
+                emissive: 0x0369a1,
                 specular: 0x38bdf8,
-                shininess: 35,
+                shininess: 80,
                 flatShading: true
             });
-            const edgeMat = new THREE.LineBasicMaterial({ color: 0x0ea5e9, transparent: true, opacity: 0.4 });
+            const innerSphere = new THREE.Mesh(innerGeo, innerMat);
+            coreGroup.add(innerSphere);
 
-            const cityBounds = 160;
-            for (let x = -cityBounds; x <= cityBounds; x += 22) {
-                for (let z = -cityBounds; z <= 50; z += 22) {
-                    if (Math.abs(x) < 18 || Math.abs(z + 30) < 12) continue;
-                    if (Math.random() > 0.82) continue;
+            // Outer Wireframe Cyber Shell
+            const outerGeo = new THREE.IcosahedronGeometry(4.2, 2);
+            const outerMat = new THREE.MeshBasicMaterial({
+                color: 0x38bdf8,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.45
+            });
+            const outerShell = new THREE.Mesh(outerGeo, outerMat);
+            coreGroup.add(outerShell);
 
-                    const height = THREE.MathUtils.randFloat(20, 80);
-                    const width = THREE.MathUtils.randFloat(10, 16);
-                    const depth = THREE.MathUtils.randFloat(10, 16);
+            // Orbiting Particle Ring
+            const particleCount = 120;
+            const particleGeo = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
 
-                    const geo = new THREE.BoxGeometry(width, height, depth);
-                    const building = new THREE.Mesh(geo, bldgMat);
-                    building.position.set(x + THREE.MathUtils.randFloat(-2, 2), height / 2, z);
-
-                    const edges = new THREE.LineSegments(new THREE.EdgesGeometry(geo), edgeMat);
-                    building.add(edges);
-
-                    if (height > 48) {
-                        const beaconGeo = new THREE.SphereGeometry(0.8, 6, 6);
-                        const beaconMat = new THREE.MeshBasicMaterial({ color: Math.random() > 0.5 ? 0x38bdf8 : 0xf43f5e });
-                        const beacon = new THREE.Mesh(beaconGeo, beaconMat);
-                        beacon.position.y = height / 2 + 1;
-                        building.add(beacon);
-                    }
-                    buildingGroup.add(building);
-                }
-            }
-            scene.add(buildingGroup);
-
-            // 2. Animated Vehicles (Neon Light Beams)
-            const vehicleCount = 70;
-            const vehicles = [];
-            const carGeo = new THREE.BoxGeometry(1.2, 0.6, 3.2);
-            const redMat = new THREE.MeshBasicMaterial({ color: 0xf43f5e });
-            const blueMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
-
-            for (let i = 0; i < vehicleCount; i++) {
-                const isNorth = Math.random() > 0.5;
-                const laneX = isNorth ? THREE.MathUtils.randFloat(2.5, 7.5) : THREE.MathUtils.randFloat(-7.5, -2.5);
-                const car = new THREE.Mesh(carGeo, isNorth ? blueMat : redMat);
-
-                car.position.set(laneX, 0.4, THREE.MathUtils.randFloat(-190, 110));
-                car.userData = {
-                    speed: (isNorth ? -1 : 1) * THREE.MathUtils.randFloat(0.5, 1.1),
-                    minZ: -210,
-                    maxZ: 120
-                };
-                scene.add(car);
-                vehicles.push(car);
+            for (let i = 0; i < particleCount; i++) {
+                const angle = (i / particleCount) * Math.PI * 2;
+                const radius = THREE.MathUtils.randFloat(5.2, 7.5);
+                positions[i * 3] = Math.cos(angle) * radius;
+                positions[i * 3 + 1] = THREE.MathUtils.randFloat(-1.2, 1.2);
+                positions[i * 3 + 2] = Math.sin(angle) * radius;
             }
 
-            // Mouse Interactive Parallax
+            particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            const particleMat = new THREE.PointsMaterial({
+                color: 0xfacc15,
+                size: 0.15,
+                transparent: true,
+                opacity: 0.85
+            });
+            const particleRing = new THREE.Points(particleGeo, particleMat);
+            coreGroup.add(particleRing);
+
+            scene.add(coreGroup);
+
+            // Mouse Interactive Tilt
             let mouseX = 0, mouseY = 0;
-            let targetX = 0, targetY = 42;
+            let targetX = 0, targetY = 0;
 
             window.addEventListener('mousemove', (e) => {
-                mouseX = (e.clientX / window.innerWidth - 0.5) * 20;
-                mouseY = (e.clientY / window.innerHeight - 0.5) * 10;
+                mouseX = (e.clientX / window.innerWidth - 0.5) * 1.5;
+                mouseY = (e.clientY / window.innerHeight - 0.5) * 1.5;
             });
 
             window.addEventListener('resize', () => {
@@ -429,19 +513,19 @@ hero_component_html = """
             let clock = new THREE.Clock();
             function animate() {
                 requestAnimationFrame(animate);
-                const delta = clock.getDelta();
+                const time = clock.getElapsedTime();
 
-                vehicles.forEach(car => {
-                    car.position.z += car.userData.speed;
-                    if (car.position.z < car.userData.minZ) car.position.z = car.userData.maxZ;
-                    if (car.position.z > car.userData.maxZ) car.position.z = car.userData.minZ;
-                });
+                // Rotate 3D Core
+                innerSphere.rotation.y = time * 0.3;
+                outerShell.rotation.y = -time * 0.2;
+                outerShell.rotation.x = time * 0.15;
+                particleRing.rotation.y = time * 0.4;
 
-                targetX += (mouseX - targetX) * 0.04;
-                targetY += ((42 - mouseY) - targetY) * 0.04;
-                camera.position.x = targetX;
-                camera.position.y = targetY;
-                camera.lookAt(0, 12, -40);
+                // Mouse Parallax Smooth Interpolation
+                targetX += (mouseX - targetX) * 0.05;
+                targetY += (mouseY - targetY) * 0.05;
+                coreGroup.rotation.y = targetX;
+                coreGroup.rotation.x = targetY;
 
                 renderer.render(scene, camera);
             }
@@ -452,15 +536,15 @@ hero_component_html = """
 </html>
 """
 
-# Render Full 3D Cityscape Hero Component
-components.html(hero_component_html, height=520, scrolling=False)
+# Render Ultra-Premium Hero Component
+components.html(hero_component_html, height=620, scrolling=False)
 
 # -----------------------------------------------------------------------------
-# 4. Centered Projects Subsection Header
+# 4. Centered Repositories Subsection Header
 # -----------------------------------------------------------------------------
 st.markdown("""
 <div class="section-header">
-    <div class="section-title">🚀 Portfolio Repositories & Projects</div>
+    <div class="section-title">🚀 Portfolio Repositories & Systems</div>
     <div class="section-desc">Full-stack web applications, machine learning architectures, and systems repositories</div>
 </div>
 """, unsafe_allow_html=True)
