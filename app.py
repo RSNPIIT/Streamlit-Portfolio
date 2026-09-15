@@ -263,11 +263,11 @@ st.markdown("""
 current_page = st.session_state.get('page', 'home')
 
 # -----------------------------------------------------------------------------
-# PAGE 1: HOME VIEW (Glowing Script Font for 'Jack of all Trades')
+# PAGE 1: HOME VIEW (Ultra-Clean Sleek Badge Tag for 'a.k.a RSNPIIT')
 # -----------------------------------------------------------------------------
 if current_page == 'home':
     
-    # Hero Component with Glowing Calligraphy Script for 'Jack of all Trades'
+    # Hero Component with Clean Modern Tag for 'a.k.a RSNPIIT'
     cyber_core_html = """
     <!DOCTYPE html>
     <html>
@@ -326,7 +326,29 @@ if current_page == 'home':
             }
             .small-tag { color: #38bdf8; font-size: 1.2rem; font-weight: 600; margin-bottom: 2px; }
             .main-name { font-size: 3.3rem; font-weight: 900; line-height: 1.05; color: #ffffff; letter-spacing: -1px; }
-            .bengali-name { font-size: 2.1rem; font-weight: 700; color: #fb923c; font-family: 'Hind Siliguri', sans-serif; text-shadow: 0 0 18px rgba(251, 146, 60, 0.4); margin-top: 4px; }
+            .bengali-name { font-size: 2.1rem; font-weight: 700; color: #fb923c; font-family: 'Hind Siliguri', sans-serif; text-shadow: 0 0 18px rgba(251, 146, 60, 0.4); margin-top: 2px; }
+
+            /* ULTRA-CLEAN MODERN BADGE TAG FOR 'a.k.a RSNPIIT' */
+            .aka-tag {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                background: rgba(56, 189, 248, 0.12);
+                border: 1px solid rgba(56, 189, 248, 0.35);
+                color: #94a3b8;
+                font-size: 0.88rem;
+                font-weight: 700;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                padding: 4px 14px;
+                border-radius: 20px;
+                margin-top: 8px;
+                box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
+            }
+            .aka-tag span {
+                color: #38bdf8;
+                font-weight: 800;
+            }
 
             .right-col {
                 text-align: left;
@@ -335,7 +357,7 @@ if current_page == 'home':
             .role-tag { color: #94a3b8; font-size: 1.2rem; font-weight: 600; margin-bottom: 2px; }
             .role-highlight { font-size: 2.5rem; font-weight: 900; line-height: 1.08; background: linear-gradient(135deg, #38bdf8, #06b6d4, #f43f5e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-            /* GLOWING ELEGANT CALLIGRAPHY SCRIPT FOR 'JACK OF ALL TRADES' */
+            /* GLOWING CALLIGRAPHY SCRIPT FOR 'Jack of all Trades' */
             .sub-tagline {
                 font-family: 'Great Vibes', 'Caveat', cursive;
                 font-size: 2.4rem;
@@ -359,6 +381,7 @@ if current_page == 'home':
                 <div class="small-tag">Hello! I'm</div>
                 <div class="main-name">RAMRUP<br>SATPATI</div>
                 <div class="bengali-name">রামরূপ সাতপতি</div>
+                <div><div class="aka-tag">a.k.a <span>RSNPIIT</span></div></div>
             </div>
             <div></div>
             <div class="right-col">
