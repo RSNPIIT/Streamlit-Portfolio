@@ -18,7 +18,7 @@ def set_page(page_name):
     st.session_state['page'] = page_name
 
 # -----------------------------------------------------------------------------
-# 2. Strict CSS: Hide All Streamlit Chrome & Style Fusion Components
+# 2. Strict CSS: Hide All Streamlit Chrome & Bottom Component Styles
 # -----------------------------------------------------------------------------
 st.markdown("""
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,9 +44,9 @@ header, [data-testid="stHeader"], #MainMenu, footer, [data-testid="stDecoration"
 
 :root {
     --bg-dark: #070a13;
-    --card-bg: rgba(13, 19, 36, 0.85);
-    --border-card: rgba(56, 189, 248, 0.25);
-    --border-hover: rgba(56, 189, 248, 0.7);
+    --card-bg: rgba(13, 19, 36, 0.88);
+    --border-card: rgba(56, 189, 248, 0.28);
+    --border-hover: rgba(56, 189, 248, 0.75);
     --accent-cyan: #38bdf8;
     --accent-orange: #fb923c;
     --accent-yellow: #facc15;
@@ -107,26 +107,40 @@ body, .stApp {
     box-shadow: 0 6px 20px rgba(56, 189, 248, 0.3);
 }
 
-/* GIANT TECH CARDS */
+/* ANIMATED GIANT TECH CARDS */
 .giant-card {
     background: var(--card-bg);
     border: 1px solid var(--border-card);
     border-radius: 24px;
     padding: 35px 25px;
     text-align: center;
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+    transition: all 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+.giant-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.1), transparent);
+    transition: 0.5s;
+}
+.giant-card:hover::before {
+    left: 100%;
 }
 .giant-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-10px) scale(1.02);
     border-color: var(--border-hover);
-    box-shadow: 0 25px 50px rgba(56, 189, 248, 0.3);
+    box-shadow: 0 25px 50px rgba(56, 189, 248, 0.35);
 }
+
 .card-icon-wrapper {
     width: 90px;
     height: 90px;
@@ -135,9 +149,14 @@ body, .stApp {
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
 }
+.giant-card:hover .card-icon-wrapper {
+    transform: scale(1.1) rotate(5deg);
+}
+
 .card-icon-img {
     width: 55px;
     height: 55px;
@@ -155,6 +174,31 @@ body, .stApp {
     line-height: 1.55;
     margin-bottom: 24px;
     min-height: 70px;
+}
+
+/* STREAMLIT BUTTON STYLING OVERRIDE */
+.stButton > button {
+    border-radius: 14px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.5px !important;
+    transition: all 0.3s ease !important;
+    border: none !important;
+    background: linear-gradient(135deg, #0284c7 0%, #06b6d4 50%, #f43f5e 100%) !important;
+    background-size: 200% 200% !important;
+    animation: gradientShift 4s ease infinite !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 20px rgba(2, 132, 199, 0.4) !important;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.stButton > button:hover {
+    transform: translateY(-3px) scale(1.03) !important;
+    box-shadow: 0 10px 30px rgba(6, 182, 212, 0.6) !important;
 }
 
 /* PROJECT DETAILS PAGE STYLING */
@@ -199,7 +243,7 @@ body, .stApp {
 """, unsafe_allow_html=True)
 
 # -----------------------------------------------------------------------------
-# 3. Top Navbar with Direct Contact Links
+# 3. Top Navbar (IITM Repos Option Removed per Request)
 # -----------------------------------------------------------------------------
 st.markdown("""
 <div class="top-nav">
@@ -208,7 +252,6 @@ st.markdown("""
         <a href="https://www.linkedin.com/in/ramrup-satpati-683970341" target="_blank" class="contact-chip">💼 LinkedIn</a>
         <a href="https://www.kaggle.com" target="_blank" class="contact-chip">📊 Kaggle</a>
         <a href="https://github.com/RSNPIIT" target="_blank" class="contact-chip">🐙 GitHub</a>
-        <a href="https://github.com/24f3004027" target="_blank" class="contact-chip">💻 IITM Repos</a>
         <a href="mailto:ramrupsatpati@gmail.com" class="contact-chip">✉️ Email</a>
     </div>
 </div>
@@ -220,11 +263,11 @@ st.markdown("""
 current_page = st.session_state.get('page', 'home')
 
 # -----------------------------------------------------------------------------
-# PAGE 1: HOME VIEW (Larger 3D WebGL Cyber Core + 3 Giant Option Cards)
+# PAGE 1: HOME VIEW (3D Cyber Core + Swaying Coastal Palm Trees Bottom Animation)
 # -----------------------------------------------------------------------------
 if current_page == 'home':
     
-    # Enlarged 3D WebGL Circular Cyber Core Component
+    # 3D WebGL Cyber Core & Cosmic Stars Hero Component
     cyber_core_html = """
     <!DOCTYPE html>
     <html>
@@ -240,7 +283,7 @@ if current_page == 'home':
                 font-family: 'Plus Jakarta Sans', sans-serif;
                 overflow: hidden;
                 width: 100vw;
-                height: 480px;
+                height: 420px;
                 position: relative;
             }
 
@@ -258,12 +301,12 @@ if current_page == 'home':
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                width: 480px;
-                height: 480px;
-                background: radial-gradient(circle, rgba(56, 189, 248, 0.32) 0%, rgba(2, 132, 199, 0.14) 45%, transparent 70%);
+                width: 440px;
+                height: 440px;
+                background: radial-gradient(circle, rgba(56, 189, 248, 0.35) 0%, rgba(2, 132, 199, 0.14) 45%, transparent 70%);
                 z-index: 2;
                 pointer-events: none;
-                filter: blur(20px);
+                filter: blur(18px);
             }
 
             .hero-layout {
@@ -272,26 +315,26 @@ if current_page == 'home':
                 width: 100%;
                 height: 100%;
                 display: grid;
-                grid-template-columns: 1fr 340px 1fr;
+                grid-template-columns: 1fr 310px 1fr;
                 align-items: center;
-                padding: 0 50px;
+                padding: 0 45px;
             }
 
             .left-col {
                 text-align: right;
-                padding-right: 25px;
+                padding-right: 20px;
             }
-            .small-tag { color: #38bdf8; font-size: 1.25rem; font-weight: 600; margin-bottom: 4px; }
-            .main-name { font-size: 3.6rem; font-weight: 900; line-height: 1.05; color: #ffffff; letter-spacing: -1.5px; }
-            .bengali-name { font-size: 2.3rem; font-weight: 700; color: #fb923c; font-family: 'Hind Siliguri', sans-serif; text-shadow: 0 0 20px rgba(251, 146, 60, 0.4); margin-top: 4px; }
+            .small-tag { color: #38bdf8; font-size: 1.2rem; font-weight: 600; margin-bottom: 2px; }
+            .main-name { font-size: 3.3rem; font-weight: 900; line-height: 1.05; color: #ffffff; letter-spacing: -1px; }
+            .bengali-name { font-size: 2.1rem; font-weight: 700; color: #fb923c; font-family: 'Hind Siliguri', sans-serif; text-shadow: 0 0 18px rgba(251, 146, 60, 0.4); margin-top: 4px; }
 
             .right-col {
                 text-align: left;
-                padding-left: 25px;
+                padding-left: 20px;
             }
-            .role-tag { color: #94a3b8; font-size: 1.25rem; font-weight: 600; margin-bottom: 4px; }
-            .role-highlight { font-size: 2.7rem; font-weight: 900; line-height: 1.08; background: linear-gradient(135deg, #38bdf8, #06b6d4, #f43f5e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-            .sub-tagline { color: #e2e8f0; font-size: 1.05rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; }
+            .role-tag { color: #94a3b8; font-size: 1.2rem; font-weight: 600; margin-bottom: 2px; }
+            .role-highlight { font-size: 2.5rem; font-weight: 900; line-height: 1.08; background: linear-gradient(135deg, #38bdf8, #06b6d4, #f43f5e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+            .sub-tagline { color: #e2e8f0; font-size: 1rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; }
         </style>
     </head>
     <body>
@@ -318,7 +361,7 @@ if current_page == 'home':
                 const scene = new THREE.Scene();
 
                 const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
-                camera.position.set(0, 0, 15);
+                camera.position.set(0, 0, 12.8);
 
                 const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
                 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -328,17 +371,38 @@ if current_page == 'home':
                 scene.add(ambient);
 
                 const cyanLight = new THREE.PointLight(0x38bdf8, 3.5, 50);
-                cyanLight.position.set(6, 6, 12);
+                cyanLight.position.set(6, 6, 10);
                 scene.add(cyanLight);
 
                 const roseLight = new THREE.PointLight(0xf43f5e, 3.5, 50);
-                roseLight.position.set(-6, -6, 12);
+                roseLight.position.set(-6, -6, 10);
                 scene.add(roseLight);
 
+                // Cosmic Stars
+                const starCount = 260;
+                const starGeo = new THREE.BufferGeometry();
+                const starPositions = new Float32Array(starCount * 3);
+
+                for (let i = 0; i < starCount; i++) {
+                    starPositions[i * 3] = THREE.MathUtils.randFloatSpread(35);
+                    starPositions[i * 3 + 1] = THREE.MathUtils.randFloatSpread(25);
+                    starPositions[i * 3 + 2] = THREE.MathUtils.randFloat(-10, 5);
+                }
+
+                starGeo.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+                const starMat = new THREE.PointsMaterial({
+                    color: 0x38bdf8,
+                    size: 0.12,
+                    transparent: true,
+                    opacity: 0.75
+                });
+                const starField = new THREE.Points(starGeo, starMat);
+                scene.add(starField);
+
+                // 3D Cyber Core
                 const coreGroup = new THREE.Group();
 
-                // Enlarged Inner Sphere Core
-                const innerGeo = new THREE.SphereGeometry(3.1, 32, 32);
+                const innerGeo = new THREE.SphereGeometry(2.85, 32, 32);
                 const innerMat = new THREE.MeshPhongMaterial({
                     color: 0x0284c7,
                     emissive: 0x0369a1,
@@ -349,8 +413,7 @@ if current_page == 'home':
                 const innerSphere = new THREE.Mesh(innerGeo, innerMat);
                 coreGroup.add(innerSphere);
 
-                // Enlarged Outer Wireframe Shell
-                const outerGeo = new THREE.IcosahedronGeometry(4.6, 2);
+                const outerGeo = new THREE.IcosahedronGeometry(4.2, 2);
                 const outerMat = new THREE.MeshBasicMaterial({
                     color: 0x38bdf8,
                     wireframe: true,
@@ -360,23 +423,22 @@ if current_page == 'home':
                 const outerShell = new THREE.Mesh(outerGeo, outerMat);
                 coreGroup.add(outerShell);
 
-                // Orbiting Particle Ring
-                const particleCount = 130;
+                const particleCount = 120;
                 const particleGeo = new THREE.BufferGeometry();
                 const positions = new Float32Array(particleCount * 3);
 
                 for (let i = 0; i < particleCount; i++) {
                     const angle = (i / particleCount) * Math.PI * 2;
-                    const radius = THREE.MathUtils.randFloat(5.8, 7.8);
+                    const radius = THREE.MathUtils.randFloat(5.2, 6.8);
                     positions[i * 3] = Math.cos(angle) * radius;
-                    positions[i * 3 + 1] = THREE.MathUtils.randFloat(-1.2, 1.2);
+                    positions[i * 3 + 1] = THREE.MathUtils.randFloat(-1.1, 1.1);
                     positions[i * 3 + 2] = Math.sin(angle) * radius;
                 }
 
                 particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
                 const particleMat = new THREE.PointsMaterial({
                     color: 0xfacc15,
-                    size: 0.16,
+                    size: 0.15,
                     transparent: true,
                     opacity: 0.9
                 });
@@ -409,6 +471,9 @@ if current_page == 'home':
                     outerShell.rotation.x = time * 0.18;
                     particleRing.rotation.y = time * 0.45;
 
+                    starField.rotation.y = time * 0.03;
+                    starField.rotation.x = Math.sin(time * 0.02) * 0.05;
+
                     targetX += (mouseX - targetX) * 0.05;
                     targetY += (mouseY - targetY) * 0.05;
                     coreGroup.rotation.y = targetX;
@@ -423,9 +488,9 @@ if current_page == 'home':
     </html>
     """
     
-    components.html(cyber_core_html, height=480, scrolling=False)
+    components.html(cyber_core_html, height=420, scrolling=False)
 
-    # Updated Section Header per User Request
+    # Section Header
     st.markdown("""
     <div style="text-align: center; margin-top: 15px; margin-bottom: 30px;">
         <h2 style="font-size: 2.3rem; font-weight: 800; color: #ffffff;">What I Bring to the Table</h2>
@@ -485,6 +550,131 @@ if current_page == 'home':
         if st.button("Explore Vue.js Projects ⚡", key="btn_vue", use_container_width=True, type="primary"):
             set_page('vue')
             st.rerun()
+
+    # Bottom Animation Canvas: Animated Swaying Coastal Palm Trees + Rising Particles (Southern India Theme)
+    bottom_palm_html = """
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body { background: transparent; overflow: hidden; width: 100vw; height: 130px; }
+            canvas { width: 100%; height: 100%; display: block; }
+        </style>
+    </head>
+    <body>
+        <canvas id="palmCanvas"></canvas>
+        <script>
+            const canvas = document.getElementById('palmCanvas');
+            const ctx = canvas.getContext('2d');
+            let w = canvas.width = window.innerWidth;
+            let h = canvas.height = 130;
+
+            window.addEventListener('resize', () => {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = 130;
+            });
+
+            // Particles
+            const embers = [];
+            for (let i = 0; i < 45; i++) {
+                embers.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    size: Math.random() * 2.2 + 1,
+                    vy: -(Math.random() * 0.7 + 0.3),
+                    vx: (Math.random() - 0.5) * 0.4,
+                    alpha: Math.random() * 0.7 + 0.2
+                });
+            }
+
+            // Draw Swaying Palm Tree Function
+            function drawPalmTree(x, height, angleSway, scale = 1.0) {
+                ctx.save();
+                ctx.translate(x, h);
+                ctx.scale(scale, scale);
+
+                // Trunk
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                const controlX = angleSway * 18;
+                ctx.quadraticCurveTo(controlX, -height * 0.5, angleSway * 25, -height);
+                ctx.lineWidth = 7;
+                ctx.strokeStyle = '#0f2942';
+                ctx.lineCap = 'round';
+                ctx.stroke();
+
+                // Inner Trunk Glow
+                ctx.lineWidth = 3;
+                ctx.strokeStyle = '#0284c7';
+                ctx.stroke();
+
+                // Palm Fronds / Leaves (Top of trunk)
+                const topX = angleSway * 25;
+                const topY = -height;
+                const leafAngles = [-0.8, -0.4, 0, 0.4, 0.8, -1.1, 1.1];
+
+                leafAngles.forEach((baseAngle, idx) => {
+                    ctx.save();
+                    ctx.translate(topX, topY);
+                    const finalAngle = baseAngle + angleSway * 0.4 + Math.sin(Date.now() * 0.002 + idx) * 0.05;
+                    ctx.rotate(finalAngle);
+
+                    ctx.beginPath();
+                    ctx.moveTo(0, 0);
+                    ctx.quadraticCurveTo(25, -15, 55, 10);
+                    ctx.lineWidth = 3.5;
+                    ctx.strokeStyle = idx % 2 === 0 ? '#38bdf8' : '#0284c7';
+                    ctx.stroke();
+                    ctx.restore();
+                });
+
+                ctx.restore();
+            }
+
+            function animate(time) {
+                ctx.clearRect(0, 0, w, h);
+
+                // 1. Draw Rising Embers
+                embers.forEach(p => {
+                    p.y += p.vy;
+                    p.x += p.vx;
+                    p.alpha -= 0.003;
+                    if (p.y < 0 || p.alpha <= 0) {
+                        p.x = Math.random() * w;
+                        p.y = h;
+                        p.alpha = Math.random() * 0.7 + 0.3;
+                    }
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(56, 189, 248, ${p.alpha})`;
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = '#38bdf8';
+                    ctx.fill();
+                    ctx.restore();
+                });
+
+                // 2. Coastal Breeze Swaying Palm Trees (Left and Right Silhouettes)
+                const sway1 = Math.sin(time * 0.0018) * 0.8;
+                const sway2 = Math.sin(time * 0.0022 + 1) * 0.7;
+
+                // Left Coast Palm Group
+                drawPalmTree(60, 95, sway1, 0.9);
+                drawPalmTree(120, 110, sway2, 1.05);
+
+                // Right Coast Palm Group
+                drawPalmTree(w - 120, 110, sway1, 1.05);
+                drawPalmTree(w - 60, 95, sway2, 0.9);
+
+                requestAnimationFrame(animate);
+            }
+            requestAnimationFrame(animate);
+        </script>
+    </body>
+    </html>
+    """
+    components.html(bottom_palm_html, height=130, scrolling=False)
 
 # -----------------------------------------------------------------------------
 # PAGE 2: PYTHON REPOSITORIES VIEW
@@ -645,6 +835,7 @@ elif current_page == 'vue':
             🔗 Open Repository: github.com/RSNPIIT/Vue-Projects &rarr;
         </a>
     </div>
+</div>
     """, unsafe_allow_html=True)
 
     if st.button("&larr; Back to Home Overview", key="back_vue"):
@@ -652,7 +843,7 @@ elif current_page == 'vue':
         st.rerun()
 
 # -----------------------------------------------------------------------------
-# 5. Clean Footer Notice (No Bengali Script)
+# 5. Clean Footer Notice
 # -----------------------------------------------------------------------------
 st.markdown("---")
 st.markdown("""
