@@ -1,63 +1,59 @@
-# ⚡ Streamlit Developer Portfolio — Ramrup Satpati
+# 🔥 Knight Red Streamlit Portfolio — RAMRUP SATPATI (রামরূপ সাতপতি)
 
-> **Interactive Multi-Tab Developer Portfolio & Open Source Collection Bridge**  
-> *Built with Streamlit, Python, Glassmorphism UI 2.0 aesthetics, and GNU General Public License v3.0 (GNU GPLv3).*
-
----
-
-## 🌐 Overview & Philosophy
-
-This repository contains the interactive portfolio application for **Ramrup Satpati** ([`RSNPIIT`](https://github.com/RSNPIIT) / [`24f3004027`](https://github.com/24f3004027)).
-
-It adheres to Eric S. Raymond's **Bazaar Philosophy of Open Source**, serving as an interactive bridge between personal collection monorepos and academic milestone projects at **IIT Madras**.
+> **Jack of all Trades — Interactive Multi-Tab Portfolio & Open Source Collection Bridge**  
+> *Engineered with Streamlit, HTML5 Animated Ember Sparks Canvas, Knight Red Obsidian Styling, and GNU General Public License v3.0 (GNU GPLv3).*
 
 ---
 
-## 🚀 Featured Tech Pillars & Repositories
+## ⚡ Typography & Hero Banner
 
-### 🐍 Personal Monorepos (`RSNPIIT`)
-- **Python Development (AI / ML / NLP / DL / CyberSec)**: [`RSNPIIT/Python-Projects`](https://github.com/RSNPIIT/Python-Projects) *(GNU GPLv3)*
-- **Rust Systems Development**: [`RSNPIIT/Rust-Projects`](https://github.com/RSNPIIT/Rust-Projects)
-- **Vue.js Modern Reactive Engineering**: [`RSNPIIT/Vue-Projects`](https://github.com/RSNPIIT/Vue-Projects)
-
-### 🎓 IIT Madras Academic S-Grade Term Projects (`24f3004027`)
-- **Deep Learning & GenAI (Smart MCQ Solver)**: Grade S (10.0 CGPA) | Rank 60 | Score 91.00/100  
-  👉 [Live Web Site](https://24f3004027.github.io/Deep_Learning_Project/) | [GitHub Repo](https://github.com/24f3004027/Deep_Learning_Project)
-- **Machine Learning Practice (Heavy Equipment Price Prediction)**: Grade S (10.0 CGPA) | Validation RMSLE 0.1866  
-  👉 [GitHub Repo](https://github.com/24f3004027/MLP_Project)
-- **PulseCare HMS (Hospital Management System v2.0)**: Full-Stack Flask/SQLAlchemy App with 3D Medical Canvas Engine  
-  👉 [Live Showcase](https://24f3004027.github.io/HMS-MAD-Projectv1/) | [GitHub Repo](https://github.com/24f3004027/HMS-MAD-Projectv1)
-
----
-
-## 💻 Quickstart & Local Setup
-
-```bash
-# 1. Clone the repository
-git clone git@github.com:RSNPIIT/Streamlit-Portfolio.git
-cd Streamlit-Portfolio
-
-# 2. Create and activate virtual environment
-python3 -m venv venv
-source venv/bin/activate
-
-# 3. Install dependencies
-pip install -r requirements.txt
-
-# 4. Launch Streamlit Portfolio Application
-streamlit run app.py
+```
+RAMRUP SATPATI
+রামরূপ সাতপতি
+Jack of all Trades
 ```
 
-Open your browser at `http://localhost:8501`.
+---
+
+## ⚔️ Project Repositories Mapping
+
+### 🐍 Python Projects
+- **Personal Collection**: [`RSNPIIT/Python-Projects`](https://github.com/RSNPIIT/Python-Projects) *(GNU GPLv3)*
+- **PulseCare HMS (Hospital Management System v2.0)**: [`24f3004027/HMS-MAD-Projectv1`](https://github.com/24f3004027/HMS-MAD-Projectv1)
+- **ParkSmart Vehicle Parking App**: [`24f3004027/vehicle-parking-appv1`](https://github.com/24f3004027/vehicle-parking-appv1)
+- **Deep Learning Smart MCQ Solver**: [`24f3004027/Deep_Learning_Project`](https://github.com/24f3004027/Deep_Learning_Project) *(Grade S, Rank 60)*
+- **Machine Learning Price Prediction**: [`24f3004027/MLP_Project`](https://github.com/24f3004027/MLP_Project) *(Grade S, RMSLE 0.1866)*
+- **Placement Portal Application V2**: [`24f3004027/Placement_Portal_Application_V2`](https://github.com/24f3004027/Placement_Portal_Application_V2)
+
+### 🦀 Rust Projects
+- **Personal Collection**: [`RSNPIIT/Rust-Projects`](https://github.com/RSNPIIT/Rust-Projects)
+
+### ⚡ Vue Projects
+- **Personal Collection**: [`RSNPIIT/Vue-Projects`](https://github.com/RSNPIIT/Vue-Projects)
 
 ---
 
-## ☁️ Deploying to Streamlit Community Cloud
+## 🚀 Future Horizons & Down-Right Notice
 
-1. Push this repository to GitHub: `https://github.com/RSNPIIT/Streamlit-Portfolio`.
-2. Sign in to [Streamlit Community Cloud](https://share.streamlit.io).
-3. Select **New App** -> Select repository `RSNPIIT/Streamlit-Portfolio`, branch `main`, and main file path `app.py`.
-4. Click **Deploy!**
+> *"Learning much more and A lot more to come... stay tuned 🔥"*
+
+---
+
+## 💻 Local Quickstart
+
+```bash
+# Clone the repository
+git clone git@github.com-ramrup:RSNPIIT/Streamlit-Portfolio.git
+cd Streamlit-Portfolio
+
+# Setup virtual environment
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+# Run Streamlit App
+streamlit run app.py
+```
 
 ---
 
