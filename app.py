@@ -23,7 +23,7 @@ def set_page(page_name):
 st.markdown("""
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Caveat:wght@600;700&family=Hind+Siliguri:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 /* Hide Streamlit Top Chrome & Header Elements Completely */
@@ -243,7 +243,7 @@ body, .stApp {
 """, unsafe_allow_html=True)
 
 # -----------------------------------------------------------------------------
-# 3. Top Navbar (IITM Repos Option Removed per Request)
+# 3. Top Navbar
 # -----------------------------------------------------------------------------
 st.markdown("""
 <div class="top-nav">
@@ -263,17 +263,17 @@ st.markdown("""
 current_page = st.session_state.get('page', 'home')
 
 # -----------------------------------------------------------------------------
-# PAGE 1: HOME VIEW (3D Cyber Core + Swaying Coastal Palm Trees Bottom Animation)
+# PAGE 1: HOME VIEW (Glowing Script Font for 'Jack of all Trades')
 # -----------------------------------------------------------------------------
 if current_page == 'home':
     
-    # 3D WebGL Cyber Core & Cosmic Stars Hero Component
+    # Hero Component with Glowing Calligraphy Script for 'Jack of all Trades'
     cyber_core_html = """
     <!DOCTYPE html>
     <html>
     <head>
         <meta charset="utf-8">
-        <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600;700&family=Plus+Jakarta+Sans:wght@400;700;800;900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Caveat:wght@600;700&family=Hind+Siliguri:wght@600;700&family=Plus+Jakarta+Sans:wght@400;700;800;900&display=swap" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
         <style>
             * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -334,7 +334,20 @@ if current_page == 'home':
             }
             .role-tag { color: #94a3b8; font-size: 1.2rem; font-weight: 600; margin-bottom: 2px; }
             .role-highlight { font-size: 2.5rem; font-weight: 900; line-height: 1.08; background: linear-gradient(135deg, #38bdf8, #06b6d4, #f43f5e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-            .sub-tagline { color: #e2e8f0; font-size: 1rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; }
+
+            /* GLOWING ELEGANT CALLIGRAPHY SCRIPT FOR 'JACK OF ALL TRADES' */
+            .sub-tagline {
+                font-family: 'Great Vibes', 'Caveat', cursive;
+                font-size: 2.4rem;
+                font-weight: 700;
+                color: #facc15;
+                text-transform: none;
+                letter-spacing: 1px;
+                margin-top: 4px;
+                text-shadow: 0 0 15px rgba(250, 204, 21, 0.7), 0 0 30px rgba(245, 158, 11, 0.4);
+                transform: rotate(-2deg);
+                display: inline-block;
+            }
         </style>
     </head>
     <body>
@@ -551,7 +564,7 @@ if current_page == 'home':
             set_page('vue')
             st.rerun()
 
-    # Bottom Animation Canvas: Animated Swaying Coastal Palm Trees + Rising Particles (Southern India Theme)
+    # Bottom Animation Canvas: Swaying Coastal Palm Trees + Rising Particles
     bottom_palm_html = """
     <!DOCTYPE html>
     <html>
@@ -588,13 +601,11 @@ if current_page == 'home':
                 });
             }
 
-            // Draw Swaying Palm Tree Function
             function drawPalmTree(x, height, angleSway, scale = 1.0) {
                 ctx.save();
                 ctx.translate(x, h);
                 ctx.scale(scale, scale);
 
-                // Trunk
                 ctx.beginPath();
                 ctx.moveTo(0, 0);
                 const controlX = angleSway * 18;
@@ -604,12 +615,10 @@ if current_page == 'home':
                 ctx.lineCap = 'round';
                 ctx.stroke();
 
-                // Inner Trunk Glow
                 ctx.lineWidth = 3;
                 ctx.strokeStyle = '#0284c7';
                 ctx.stroke();
 
-                // Palm Fronds / Leaves (Top of trunk)
                 const topX = angleSway * 25;
                 const topY = -height;
                 const leafAngles = [-0.8, -0.4, 0, 0.4, 0.8, -1.1, 1.1];
@@ -635,7 +644,6 @@ if current_page == 'home':
             function animate(time) {
                 ctx.clearRect(0, 0, w, h);
 
-                // 1. Draw Rising Embers
                 embers.forEach(p => {
                     p.y += p.vy;
                     p.x += p.vx;
@@ -655,15 +663,12 @@ if current_page == 'home':
                     ctx.restore();
                 });
 
-                // 2. Coastal Breeze Swaying Palm Trees (Left and Right Silhouettes)
                 const sway1 = Math.sin(time * 0.0018) * 0.8;
                 const sway2 = Math.sin(time * 0.0022 + 1) * 0.7;
 
-                // Left Coast Palm Group
                 drawPalmTree(60, 95, sway1, 0.9);
                 drawPalmTree(120, 110, sway2, 1.05);
 
-                // Right Coast Palm Group
                 drawPalmTree(w - 120, 110, sway1, 1.05);
                 drawPalmTree(w - 60, 95, sway2, 0.9);
 
