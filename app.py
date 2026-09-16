@@ -1348,20 +1348,126 @@ if current_page == 'home':
     """
     components.html(cards_cosmic_background_html, height=540, scrolling=False)
 
-    # Bottom Animation Canvas: Interactive Cyber Grid Horizon & Floating Tech Matrix
+    # Bottom Animation Canvas: Interactive Cyber Grid Horizon & Solid Bevel Badge
     bottom_cyber_html = """
     <!DOCTYPE html>
     <html>
     <head>
         <meta charset="utf-8">
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
         <style>
             * { margin: 0; padding: 0; box-sizing: border-box; }
-            body { background: transparent; overflow: hidden; width: 100vw; height: 160px; position: relative; }
-            canvas { width: 100%; height: 100%; display: block; }
+            body {
+                background: transparent;
+                overflow: hidden;
+                width: 100vw;
+                height: 160px;
+                position: relative;
+                font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            }
+
+            #cyberCanvas {
+                width: 100%;
+                height: 100%;
+                display: block;
+                position: absolute;
+                top: 0; left: 0;
+                z-index: 1;
+            }
+
+            /* SOLID BEVEL BADGE OVERLAY */
+            .bevel-container {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 10;
+                pointer-events: auto;
+            }
+
+            .solid-bevel-tag {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                background: linear-gradient(145deg, rgba(13, 24, 48, 0.94), rgba(7, 14, 28, 0.97));
+                border: 1.5px solid rgba(56, 189, 248, 0.45);
+                border-top: 2px solid rgba(255, 255, 255, 0.6);
+                border-left: 2px solid rgba(255, 255, 255, 0.45);
+                border-bottom: 3.5px solid rgba(2, 132, 199, 0.9);
+                border-right: 2.5px solid rgba(2, 132, 199, 0.75);
+                border-radius: 30px;
+                padding: 10px 24px;
+                color: #f8fafc;
+                font-size: 1.05rem;
+                font-weight: 800;
+                letter-spacing: 0.5px;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65), 0 0 22px rgba(56, 189, 248, 0.35), inset 0 1px 3px rgba(255, 255, 255, 0.45);
+                cursor: pointer;
+                position: relative;
+                white-space: nowrap;
+                transition: all 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            }
+
+            .solid-bevel-tag .prefix-text {
+                color: #e2e8f0;
+                font-weight: 700;
+            }
+
+            .solid-bevel-tag .morph-wrap {
+                display: inline-block;
+                position: relative;
+            }
+
+            .solid-bevel-tag .text-learning {
+                display: inline-block;
+                color: #38bdf8;
+                text-shadow: 0 0 12px rgba(56, 189, 248, 0.85);
+                transition: opacity 0.35s ease, transform 0.35s ease;
+            }
+
+            .solid-bevel-tag .text-opensource {
+                position: absolute;
+                left: 0;
+                top: 0;
+                white-space: nowrap;
+                opacity: 0;
+                transform: scale(0.78) translateY(6px);
+                color: #34d399;
+                text-shadow: 0 0 14px #34d399, 0 0 28px #10b981;
+                transition: opacity 0.35s ease, transform 0.35s ease;
+            }
+
+            .solid-bevel-tag.bevel-hover, .solid-bevel-tag:hover {
+                transform: scale(1.12) translateY(-3px);
+                border-color: #38bdf8;
+                border-top-color: #ffffff;
+                box-shadow: 0 12px 35px rgba(56, 189, 248, 0.6), 0 0 38px rgba(52, 211, 153, 0.5), inset 0 1px 4px rgba(255, 255, 255, 0.65);
+            }
+
+            .solid-bevel-tag.bevel-hover .text-learning, .solid-bevel-tag:hover .text-learning {
+                opacity: 0;
+                transform: scale(0.78) translateY(-6px);
+            }
+
+            .solid-bevel-tag.bevel-hover .text-opensource, .solid-bevel-tag:hover .text-opensource {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         </style>
     </head>
     <body>
         <canvas id="cyberCanvas"></canvas>
+
+        <div class="bevel-container">
+            <div class="solid-bevel-tag" id="learningTag">
+                <span class="prefix-text">Forever for</span>
+                <span class="morph-wrap">
+                    <span class="text-learning">continuous Learning</span>
+                    <span class="text-opensource">open source</span>
+                </span>
+            </div>
+        </div>
+
         <script>
             const canvas = document.getElementById('cyberCanvas');
             const ctx = canvas.getContext('2d');
@@ -1375,11 +1481,11 @@ if current_page == 'home':
 
             // Floating Tech Badges / Glyphs
             const badges = [
-                { text: '🐍 Python & AI/ML', x: w * 0.12, y: 140, speed: 0.35, alpha: 0.85, scale: 0.95 },
-                { text: '🦀 Rust Systems', x: w * 0.32, y: 150, speed: 0.42, alpha: 0.88, scale: 1.0 },
-                { text: '⚡ Vue.js Frontend', x: w * 0.58, y: 135, speed: 0.38, alpha: 0.88, scale: 1.0 },
-                { text: '🧠 PyTorch & GenAI', x: w * 0.78, y: 145, speed: 0.32, alpha: 0.78, scale: 0.9 },
-                { text: '🛡️ Memory Safety', x: w * 0.45, y: 155, speed: 0.48, alpha: 0.75, scale: 0.85 },
+                { text: '🐍 Python & AI/ML', x: w * 0.10, y: 140, speed: 0.35, alpha: 0.85, scale: 0.95 },
+                { text: '🦀 Rust Systems', x: w * 0.28, y: 150, speed: 0.42, alpha: 0.88, scale: 1.0 },
+                { text: '⚡ Vue.js Frontend', x: w * 0.68, y: 135, speed: 0.38, alpha: 0.88, scale: 1.0 },
+                { text: '🧠 PyTorch & GenAI', x: w * 0.85, y: 145, speed: 0.32, alpha: 0.78, scale: 0.9 },
+                { text: '🛡️ Memory Safety', x: w * 0.42, y: 155, speed: 0.48, alpha: 0.75, scale: 0.85 },
             ];
 
             // Cyber Energy Particles
@@ -1397,8 +1503,23 @@ if current_page == 'home':
             }
 
             let mouseX = w / 2;
+            const learningTag = document.getElementById('learningTag');
+
             window.addEventListener('mousemove', (e) => {
                 mouseX = e.clientX;
+
+                // Proximity check for Solid Bevel Tag (140px radius)
+                if (learningTag) {
+                    const rect = learningTag.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+                    const dist = Math.hypot(e.clientX - centerX, e.clientY - centerY);
+                    if (dist < 140) {
+                        learningTag.classList.add('bevel-hover');
+                    } else {
+                        learningTag.classList.remove('bevel-hover');
+                    }
+                }
             });
 
             function drawHorizonGrid(time) {
