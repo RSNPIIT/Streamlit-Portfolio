@@ -14,8 +14,16 @@ st.set_page_config(
 if 'page' not in st.session_state:
     st.session_state['page'] = 'home'
 
+query_page = st.query_params.get('page', None)
+if query_page in ['home', 'python', 'rust', 'vue']:
+    st.session_state['page'] = query_page
+
 def set_page(page_name):
     st.session_state['page'] = page_name
+    if page_name == 'home':
+        st.query_params.clear()
+    else:
+        st.query_params['page'] = page_name
 
 # -----------------------------------------------------------------------------
 # 2. Strict CSS: Hide All Streamlit Chrome & Bottom Component Styles
@@ -374,6 +382,7 @@ body, .stApp {
     color: #34d399;
     text-shadow: 0 0 12px rgba(52, 211, 153, 0.6);
 }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -870,29 +879,263 @@ if current_page == 'home':
     </div>
     """, unsafe_allow_html=True)
 
-    # Dynamic Cosmic Canvas: Falling Asteroids & Supernova Star Explosions
+    # Unified Cosmic Background & Tech Cards Component (Zero Margins / Seamless Borderless Canvas)
     cards_cosmic_background_html = """
     <!DOCTYPE html>
     <html>
     <head>
         <meta charset="utf-8">
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
         <style>
             * { margin: 0; padding: 0; box-sizing: border-box; }
-            body { background: transparent; overflow: hidden; width: 100vw; height: 180px; position: relative; }
-            canvas { width: 100%; height: 100%; display: block; }
+            body {
+                background: transparent;
+                overflow: hidden;
+                width: 100%;
+                height: 540px;
+                position: relative;
+                font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+                color: #f8fafc;
+            }
+
+            #cosmicCanvas {
+                position: absolute;
+                top: 0; left: 0;
+                width: 100%; height: 100%;
+                z-index: 1;
+                display: block;
+            }
+
+            .cards-overlay {
+                position: absolute;
+                top: 0; left: 0;
+                width: 100%; height: 100%;
+                z-index: 10;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 24px;
+                padding: 10px 20px;
+                pointer-events: none;
+            }
+
+            .giant-card {
+                pointer-events: auto;
+                flex: 1;
+                max-width: 380px;
+                height: 490px;
+                background: rgba(13, 19, 36, 0.88);
+                border: 1px solid rgba(56, 189, 248, 0.28);
+                border-radius: 24px;
+                padding: 30px 22px;
+                text-align: center;
+                transition: all 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                position: relative;
+                overflow: hidden;
+                backdrop-filter: blur(12px);
+                animation: cardEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) ease-out;
+            }
+
+            .giant-card::before {
+                content: '';
+                position: absolute;
+                top: 0; left: -100%;
+                width: 100%; height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.15), transparent);
+                transition: 0.6s;
+            }
+            .giant-card:hover::before {
+                left: 100%;
+            }
+            .giant-card:hover {
+                transform: translateY(-10px) scale(1.025);
+                border-color: rgba(56, 189, 248, 0.75);
+                box-shadow: 0 28px 60px rgba(56, 189, 248, 0.45);
+            }
+
+            @keyframes cardEntrance {
+                0% { opacity: 0; transform: translateY(30px) scale(0.95); }
+                100% { opacity: 1; transform: translateY(0) scale(1); }
+            }
+
+            .giant-card > * {
+                position: relative;
+                z-index: 2;
+            }
+
+            .card-icon-wrapper {
+                width: 82px;
+                height: 82px;
+                border-radius: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto 16px auto;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                transition: all 0.35s ease;
+            }
+            .giant-card:hover .card-icon-wrapper {
+                transform: scale(1.15) rotate(6deg);
+                background: rgba(56, 189, 248, 0.15);
+                border-color: rgba(56, 189, 248, 0.5);
+                box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
+            }
+
+            .card-icon-img {
+                width: 48px;
+                height: 48px;
+                object-fit: contain;
+            }
+            .card-title {
+                font-size: 1.7rem;
+                font-weight: 800;
+                margin-bottom: 10px;
+            }
+            .card-desc {
+                color: #94a3b8;
+                font-size: 0.93rem;
+                line-height: 1.55;
+                margin-bottom: 18px;
+                min-height: 70px;
+            }
+
+            .card-btn {
+                width: 100%;
+                padding: 13px 18px;
+                border-radius: 14px;
+                font-size: 0.92rem;
+                font-weight: 800;
+                letter-spacing: 0.5px;
+                transition: all 0.35s ease;
+                border: none;
+                background: linear-gradient(135deg, #0284c7 0%, #06b6d4 50%, #f43f5e 100%);
+                background-size: 200% 200%;
+                animation: gradientShift 4s ease infinite;
+                color: #ffffff;
+                box-shadow: 0 4px 20px rgba(2, 132, 199, 0.4);
+                cursor: pointer;
+                outline: none;
+            }
+
+            @keyframes gradientShift {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+            }
+
+            .card-btn:hover {
+                transform: translateY(-3px) scale(1.03);
+                box-shadow: 0 12px 35px rgba(6, 182, 212, 0.7);
+            }
+
+            /* Rotational Glow Auras behind Cards */
+            .python-glow-card::after {
+                content: '';
+                position: absolute;
+                top: -50%; left: -50%;
+                width: 200%; height: 200%;
+                background: radial-gradient(circle, rgba(56, 189, 248, 0.18) 0%, rgba(2, 132, 199, 0.05) 50%, transparent 70%);
+                animation: rotateAura 12s linear infinite;
+                z-index: 1;
+                pointer-events: none;
+            }
+            .rust-glow-card::after {
+                content: '';
+                position: absolute;
+                top: -50%; left: -50%;
+                width: 200%; height: 200%;
+                background: radial-gradient(circle, rgba(251, 146, 60, 0.20) 0%, rgba(234, 88, 12, 0.06) 50%, transparent 70%);
+                animation: rotateAura 10s linear infinite reverse;
+                z-index: 1;
+                pointer-events: none;
+            }
+            .vue-glow-card::after {
+                content: '';
+                position: absolute;
+                top: -50%; left: -50%;
+                width: 200%; height: 200%;
+                background: radial-gradient(circle, rgba(52, 211, 153, 0.18) 0%, rgba(16, 185, 129, 0.05) 50%, transparent 70%);
+                animation: rotateAura 14s linear infinite;
+                z-index: 1;
+                pointer-events: none;
+            }
+
+            @keyframes rotateAura {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
         </style>
     </head>
     <body>
         <canvas id="cosmicCanvas"></canvas>
+
+        <div class="cards-overlay">
+            <!-- CARD 1: PYTHON -->
+            <div class="giant-card python-glow-card">
+                <div>
+                    <div class="card-icon-wrapper">
+                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" class="card-icon-img" alt="Python">
+                    </div>
+                    <div class="card-title" style="color: #38bdf8;">Python & AI/ML</div>
+                    <div class="card-desc">
+                        Full-stack Flask web apps, PyTorch Deep Learning MCQ Solver, Gradient Boosting ML price prediction, Healthcare HMS, and Open Source Monorepo.
+                    </div>
+                </div>
+                <button class="card-btn" onclick="navigateTo('python')">Explore Python Projects 🐍</button>
+            </div>
+
+            <!-- CARD 2: RUST -->
+            <div class="giant-card rust-glow-card">
+                <div>
+                    <div class="card-icon-wrapper">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Rust_programming_language_black_logo.svg" class="card-icon-img" style="filter: invert(1);" alt="Rust">
+                    </div>
+                    <div class="card-title" style="color: #fb923c;">Rust Systems</div>
+                    <div class="card-desc">
+                        Low-level systems programming, memory safety without GC, high-concurrency CLI tools, zero-cost abstraction patterns, and monorepo collection.
+                    </div>
+                </div>
+                <button class="card-btn" onclick="navigateTo('rust')">Explore Rust Projects 🦀</button>
+            </div>
+
+            <!-- CARD 3: VUE -->
+            <div class="giant-card vue-glow-card">
+                <div>
+                    <div class="card-icon-wrapper">
+                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original.svg" class="card-icon-img" alt="Vue.js">
+                    </div>
+                    <div class="card-title" style="color: #34d399;">Vue.js Frontend</div>
+                    <div class="card-desc">
+                        Reactive web user interfaces, single-page application (SPA) architectures, custom component libraries, and frontend monorepo applications.
+                    </div>
+                </div>
+                <button class="card-btn" onclick="navigateTo('vue')">Explore Vue.js Projects ⚡</button>
+            </div>
+        </div>
+
         <script>
+            function navigateTo(page) {
+                try {
+                    window.top.location.search = '?page=' + page;
+                } catch(e) {
+                    window.parent.location.search = '?page=' + page;
+                }
+            }
+
             const canvas = document.getElementById('cosmicCanvas');
             const ctx = canvas.getContext('2d');
             let w = canvas.width = window.innerWidth;
-            let h = canvas.height = 180;
+            let h = canvas.height = 540;
 
             window.addEventListener('resize', () => {
                 w = canvas.width = window.innerWidth;
-                h = canvas.height = 180;
+                h = canvas.height = 540;
             });
 
             // 1. Shooting Asteroids / Comets
@@ -901,19 +1144,19 @@ if current_page == 'home':
                     this.reset();
                 }
                 reset() {
-                    this.x = Math.random() * (w + 300) - 100;
-                    this.y = -40;
-                    this.length = Math.random() * 140 + 90;
-                    this.speed = Math.random() * 7 + 5;
+                    this.x = Math.random() * (w + 400) - 100;
+                    this.y = -60;
+                    this.length = Math.random() * 160 + 100;
+                    this.speed = Math.random() * 8 + 5.5;
                     this.angle = Math.PI / 4 + (Math.random() - 0.5) * 0.25;
-                    this.size = Math.random() * 2.5 + 1.5;
+                    this.size = Math.random() * 2.8 + 1.5;
                     const colors = ['#38bdf8', '#fb923c', '#facc15', '#34d399', '#f43f5e'];
                     this.color = colors[Math.floor(Math.random() * colors.length)];
                 }
                 update() {
                     this.x -= Math.cos(this.angle) * this.speed;
                     this.y += Math.sin(this.angle) * this.speed;
-                    if (this.x < -150 || this.y > h + 150) {
+                    if (this.x < -200 || this.y > h + 200) {
                         this.reset();
                     }
                 }
@@ -924,7 +1167,7 @@ if current_page == 'home':
                     
                     const grad = ctx.createLinearGradient(this.x, this.y, tailX, tailY);
                     grad.addColorStop(0, this.color);
-                    grad.addColorStop(0.4, this.color);
+                    grad.addColorStop(0.35, this.color);
                     grad.addColorStop(1, 'transparent');
                     
                     ctx.beginPath();
@@ -937,9 +1180,9 @@ if current_page == 'home':
 
                     // Blazing Head
                     ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size * 1.6, 0, Math.PI * 2);
+                    ctx.arc(this.x, this.y, this.size * 1.8, 0, Math.PI * 2);
                     ctx.fillStyle = '#ffffff';
-                    ctx.shadowBlur = 16;
+                    ctx.shadowBlur = 18;
                     ctx.shadowColor = this.color;
                     ctx.fill();
                     ctx.restore();
@@ -953,18 +1196,18 @@ if current_page == 'home':
                     this.y = y;
                     this.color = color;
                     this.particles = [];
-                    const particleCount = 50;
+                    const particleCount = 55;
                     for (let i = 0; i < particleCount; i++) {
                         const angle = Math.random() * Math.PI * 2;
-                        const speed = Math.random() * 4.5 + 1.2;
+                        const speed = Math.random() * 4.8 + 1.2;
                         this.particles.push({
                             x: this.x,
                             y: this.y,
                             vx: Math.cos(angle) * speed,
                             vy: Math.sin(angle) * speed,
-                            size: Math.random() * 3 + 1,
+                            size: Math.random() * 3.2 + 1,
                             alpha: 1.0,
-                            decay: Math.random() * 0.02 + 0.015
+                            decay: Math.random() * 0.018 + 0.012
                         });
                     }
                 }
@@ -982,7 +1225,7 @@ if current_page == 'home':
                             ctx.beginPath();
                             ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
                             ctx.fillStyle = p.alpha > 0.5 ? '#ffffff' : this.color;
-                            ctx.shadowBlur = 12;
+                            ctx.shadowBlur = 14;
                             ctx.shadowColor = this.color;
                             ctx.globalAlpha = p.alpha;
                             ctx.fill();
@@ -995,28 +1238,28 @@ if current_page == 'home':
                 }
             }
 
-            const asteroids = Array.from({ length: 6 }, () => new Asteroid());
+            const asteroids = Array.from({ length: 9 }, () => new Asteroid());
             let supernovas = [];
 
-            // Trigger Supernova explosions behind cards periodically
+            // Trigger Supernova explosions behind cards periodically across 540px depth
             let lastExplosion = 0;
             function triggerRandomSupernova(time) {
-                if (time - lastExplosion > 1800) {
+                if (time - lastExplosion > 1400) {
                     lastExplosion = time;
                     const cardPositions = [
-                        { x: w * 0.18, color: '#38bdf8' }, // Python Cyan
+                        { x: w * 0.20, color: '#38bdf8' }, // Python Cyan
                         { x: w * 0.50, color: '#fb923c' }, // Rust Orange
-                        { x: w * 0.82, color: '#34d399' }  // Vue Emerald
+                        { x: w * 0.80, color: '#34d399' }  // Vue Emerald
                     ];
                     const pos = cardPositions[Math.floor(Math.random() * cardPositions.length)];
-                    const spawnY = Math.random() * (h - 40) + 20;
+                    const spawnY = Math.random() * (h - 80) + 40;
                     supernovas.push(new Supernova(pos.x, spawnY, pos.color));
                 }
             }
 
             // Interactive Mouse Explosions
             window.addEventListener('mousemove', (e) => {
-                if (Math.random() > 0.6) {
+                if (Math.random() > 0.65) {
                     const colors = ['#38bdf8', '#fb923c', '#facc15', '#34d399'];
                     const color = colors[Math.floor(Math.random() * colors.length)];
                     supernovas.push(new Supernova(e.clientX, e.clientY, color));
@@ -1051,60 +1294,7 @@ if current_page == 'home':
     </body>
     </html>
     """
-    components.html(cards_cosmic_background_html, height=180, scrolling=False)
-
-    c1, c2, c3 = st.columns(3, gap="large")
-
-    # CARD 1: PYTHON (ANIMATED CYAN ENERGY GLOW BACKGROUND)
-    with c1:
-        st.markdown("""
-        <div class="giant-card python-glow-card">
-            <div class="card-icon-wrapper">
-                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" class="card-icon-img" alt="Python">
-            </div>
-            <div class="card-title" style="color: #38bdf8;">Python & AI/ML</div>
-            <div class="card-desc">
-                Full-stack Flask web apps, PyTorch Deep Learning MCQ Solver, Gradient Boosting ML price prediction, Healthcare HMS, and Open Source Monorepo.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        if st.button("Explore Python Projects 🐍", key="btn_python", use_container_width=True, type="primary"):
-            set_page('python')
-            st.rerun()
-
-    # CARD 2: RUST (ANIMATED ORANGE FLAME ENERGY GLOW BACKGROUND)
-    with c2:
-        st.markdown("""
-        <div class="giant-card rust-glow-card">
-            <div class="card-icon-wrapper">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Rust_programming_language_black_logo.svg" class="card-icon-img" style="filter: invert(1);" alt="Rust">
-            </div>
-            <div class="card-title" style="color: #fb923c;">Rust Systems</div>
-            <div class="card-desc">
-                Low-level systems programming, memory safety without GC, high-concurrency CLI tools, zero-cost abstraction patterns, and monorepo collection.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        if st.button("Explore Rust Projects 🦀", key="btn_rust", use_container_width=True, type="primary"):
-            set_page('rust')
-            st.rerun()
-
-    # CARD 3: VUE (ANIMATED EMERALD MATRIX ENERGY GLOW BACKGROUND)
-    with c3:
-        st.markdown("""
-        <div class="giant-card vue-glow-card">
-            <div class="card-icon-wrapper">
-                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original.svg" class="card-icon-img" alt="Vue.js">
-            </div>
-            <div class="card-title" style="color: #34d399;">Vue.js Frontend</div>
-            <div class="card-desc">
-                Reactive web user interfaces, single-page application (SPA) architectures, custom component libraries, and frontend monorepo applications.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        if st.button("Explore Vue.js Projects ⚡", key="btn_vue", use_container_width=True, type="primary"):
-            set_page('vue')
-            st.rerun()
+    components.html(cards_cosmic_background_html, height=540, scrolling=False)
 
     # Bottom Animation Canvas: Interactive Cyber Grid Horizon & Floating Tech Matrix
     bottom_cyber_html = """
@@ -1405,9 +1595,7 @@ elif current_page == 'vue':
         </p>
         <a href="https://github.com/RSNPIIT/Vue-Projects" target="_blank" class="project-link" style="font-size: 1.15rem;">
             🔗 Open Repository: github.com/RSNPIIT/Vue-Projects &rarr;
-        </a>
     </div>
-</div>
     """, unsafe_allow_html=True)
 
     if st.button("&larr; Back to Home Overview", key="back_vue"):
