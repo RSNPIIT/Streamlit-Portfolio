@@ -123,22 +123,28 @@ body, .stApp {
     justify-content: space-between;
     position: relative;
     overflow: hidden;
+    animation: cardEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) ease-out;
 }
 .giant-card::before {
     content: '';
     position: absolute;
     top: 0; left: -100%;
     width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.1), transparent);
-    transition: 0.5s;
+    background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.15), transparent);
+    transition: 0.6s;
 }
 .giant-card:hover::before {
     left: 100%;
 }
 .giant-card:hover {
-    transform: translateY(-10px) scale(1.02);
+    transform: translateY(-12px) scale(1.025);
     border-color: var(--border-hover);
-    box-shadow: 0 25px 50px rgba(56, 189, 248, 0.35);
+    box-shadow: 0 28px 60px rgba(56, 189, 248, 0.45);
+}
+
+@keyframes cardEntrance {
+    0% { opacity: 0; transform: translateY(30px) scale(0.95); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .card-icon-wrapper {
@@ -150,11 +156,14 @@ body, .stApp {
     justify-content: center;
     margin-bottom: 20px;
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: transform 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: all 0.35s ease;
 }
 .giant-card:hover .card-icon-wrapper {
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.15) rotate(6deg);
+    background: rgba(56, 189, 248, 0.15);
+    border-color: rgba(56, 189, 248, 0.5);
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
 }
 
 .card-icon-img {
@@ -181,13 +190,15 @@ body, .stApp {
     border-radius: 14px !important;
     font-weight: 800 !important;
     letter-spacing: 0.5px !important;
-    transition: all 0.3s ease !important;
+    transition: all 0.35s ease !important;
     border: none !important;
     background: linear-gradient(135deg, #0284c7 0%, #06b6d4 50%, #f43f5e 100%) !important;
     background-size: 200% 200% !important;
     animation: gradientShift 4s ease infinite !important;
     color: #ffffff !important;
     box-shadow: 0 4px 20px rgba(2, 132, 199, 0.4) !important;
+    position: relative;
+    overflow: hidden;
 }
 
 @keyframes gradientShift {
@@ -197,8 +208,125 @@ body, .stApp {
 }
 
 .stButton > button:hover {
-    transform: translateY(-3px) scale(1.03) !important;
-    box-shadow: 0 10px 30px rgba(6, 182, 212, 0.6) !important;
+    transform: translateY(-4px) scale(1.035) !important;
+    box-shadow: 0 12px 35px rgba(6, 182, 212, 0.7) !important;
+}
+
+/* FAST WORD-BY-WORD STAGGERED REVEAL ANIMATIONS */
+.section-header-wrapper {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 35px;
+}
+.stagger-words-h2 {
+    font-size: 2.3rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+.stagger-words-h2 span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(22px) scale(0.85);
+    filter: blur(6px);
+    animation: fastWordReveal 0.28s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}
+.stagger-words-h2 span:nth-child(1) { animation-delay: 0.04s; }
+.stagger-words-h2 span:nth-child(2) { animation-delay: 0.08s; }
+.stagger-words-h2 span:nth-child(3) { animation-delay: 0.12s; }
+.stagger-words-h2 span:nth-child(4) { animation-delay: 0.16s; }
+.stagger-words-h2 span:nth-child(5) { animation-delay: 0.20s; }
+.stagger-words-h2 span:nth-child(6) { animation-delay: 0.24s; }
+
+.stagger-words-p {
+    color: #94a3b8;
+    font-size: 1.05rem;
+}
+.stagger-words-p span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(4px);
+    animation: fastWordReveal 0.22s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}
+.stagger-words-p span:nth-child(1)  { animation-delay: 0.28s; }
+.stagger-words-p span:nth-child(2)  { animation-delay: 0.31s; }
+.stagger-words-p span:nth-child(3)  { animation-delay: 0.34s; }
+.stagger-words-p span:nth-child(4)  { animation-delay: 0.37s; }
+.stagger-words-p span:nth-child(5)  { animation-delay: 0.40s; }
+.stagger-words-p span:nth-child(6)  { animation-delay: 0.43s; }
+.stagger-words-p span:nth-child(7)  { animation-delay: 0.46s; }
+.stagger-words-p span:nth-child(8)  { animation-delay: 0.49s; }
+.stagger-words-p span:nth-child(9)  { animation-delay: 0.52s; }
+.stagger-words-p span:nth-child(10) { animation-delay: 0.55s; }
+.stagger-words-p span:nth-child(11) { animation-delay: 0.58s; }
+.stagger-words-p span:nth-child(12) { animation-delay: 0.61s; }
+.stagger-words-p span:nth-child(13) { animation-delay: 0.64s; }
+
+@keyframes fastWordReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(22px) scale(0.85);
+        filter: blur(6px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* LANGUAGE-SPECIFIC ANIMATED BACKGROUND GLOW ENERGY FIELDS */
+.giant-card > * {
+    position: relative;
+    z-index: 2;
+}
+
+.python-glow-card {
+    position: relative;
+}
+.python-glow-card::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.18) 0%, rgba(2, 132, 199, 0.05) 50%, transparent 70%);
+    animation: rotateAura 12s linear infinite;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.rust-glow-card {
+    position: relative;
+}
+.rust-glow-card::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(251, 146, 60, 0.20) 0%, rgba(234, 88, 12, 0.06) 50%, transparent 70%);
+    animation: rotateAura 10s linear infinite reverse;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.vue-glow-card {
+    position: relative;
+}
+.vue-glow-card::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(52, 211, 153, 0.18) 0%, rgba(16, 185, 129, 0.05) 50%, transparent 70%);
+    animation: rotateAura 14s linear infinite;
+    z-index: 1;
+    pointer-events: none;
+}
+
+@keyframes rotateAura {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* PROJECT DETAILS PAGE STYLING */
@@ -209,11 +337,13 @@ body, .stApp {
     padding: 24px;
     margin-bottom: 20px;
     box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5);
-    transition: all 0.3s ease;
+    transition: all 0.35s ease;
+    animation: cardEntrance 0.6s ease-out;
 }
 .repo-card:hover {
     border-color: var(--border-hover);
-    transform: translateY(-4px);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 45px rgba(56, 189, 248, 0.3);
 }
 .badge-pill {
     display: inline-block;
@@ -224,6 +354,10 @@ body, .stApp {
     margin-right: 6px;
     margin-bottom: 10px;
     text-transform: uppercase;
+    transition: transform 0.2s ease;
+}
+.badge-pill:hover {
+    transform: scale(1.08);
 }
 .badge-cyan { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
 .badge-emerald { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
@@ -234,10 +368,11 @@ body, .stApp {
     color: #38bdf8;
     font-weight: 700;
     text-decoration: none !important;
+    transition: all 0.25s ease;
 }
 .project-link:hover {
     color: #34d399;
-    text-shadow: 0 0 10px rgba(52, 211, 153, 0.5);
+    text-shadow: 0 0 12px rgba(52, 211, 153, 0.6);
 }
 </style>
 """, unsafe_allow_html=True)
@@ -246,8 +381,46 @@ body, .stApp {
 # 3. Top Navbar
 # -----------------------------------------------------------------------------
 st.markdown("""
+<style>
+.nav-bengali-name {
+    font-size: 0.95rem;
+    color: #fb923c;
+    font-family: 'Hind Siliguri', sans-serif;
+    margin-left: 8px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    text-shadow: 0 0 10px rgba(251, 146, 60, 0.9), 0 0 20px rgba(249, 115, 22, 0.7);
+    transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.nav-bengali-name .nav-bn {
+    display: inline-block;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.nav-bengali-name .nav-or {
+    position: absolute;
+    left: 0; top: 0;
+    white-space: nowrap;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    color: #facc15;
+    text-shadow: 0 0 12px #facc15, 0 0 25px #f59e0b;
+}
+.nav-bengali-name:hover {
+    transform: scale(1.3) translateY(-2px);
+}
+.nav-bengali-name:hover .nav-bn {
+    opacity: 0;
+    transform: scale(0.8);
+}
+.nav-bengali-name:hover .nav-or {
+    opacity: 1;
+    transform: scale(1);
+}
+</style>
 <div class="top-nav">
-    <div class="nav-brand">RAMRUP <span>SATPATI</span> <span style="font-size: 0.9rem; color: #fb923c; font-family: 'Hind Siliguri'; margin-left: 6px;">রামরূপ সাতপতি</span></div>
+    <div class="nav-brand">RAMRUP <span>SATPATI</span> <span class="nav-bengali-name"><span class="nav-bn">রামরূপ সাতপতি</span><span class="nav-or">ରାମରୂପ ସତପତି</span></span></div>
     <div class="nav-contacts">
         <a href="https://www.linkedin.com/in/ramrup-satpati-683970341" target="_blank" class="contact-chip">💼 LinkedIn</a>
         <a href="https://www.kaggle.com" target="_blank" class="contact-chip">📊 Kaggle</a>
@@ -326,28 +499,116 @@ if current_page == 'home':
             }
             .small-tag { color: #38bdf8; font-size: 1.2rem; font-weight: 600; margin-bottom: 2px; }
             .main-name { font-size: 3.3rem; font-weight: 900; line-height: 1.05; color: #ffffff; letter-spacing: -1px; }
-            .bengali-name { font-size: 2.1rem; font-weight: 700; color: #fb923c; font-family: 'Hind Siliguri', sans-serif; text-shadow: 0 0 18px rgba(251, 146, 60, 0.4); margin-top: 2px; }
 
-            /* ULTRA-CLEAN MODERN BADGE TAG FOR 'a.k.a RSNPIIT' */
+            /* NEON INTENSE GLOWING BENGALI -> ODIA SCRIPT MORPH */
+            .bengali-name {
+                font-size: 2.2rem;
+                font-weight: 800;
+                color: #ffedd5;
+                font-family: 'Hind Siliguri', sans-serif;
+                text-shadow: 0 0 10px #fb923c, 0 0 22px #f97316, 0 0 38px #ea580c, 0 0 60px rgba(234, 88, 12, 0.85);
+                margin-top: 4px;
+                display: inline-block;
+                position: relative;
+                cursor: pointer;
+                transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            }
+            .bengali-name .text-bn {
+                display: inline-block;
+                transition: opacity 0.35s ease, transform 0.35s ease;
+            }
+            .bengali-name .text-or {
+                position: absolute;
+                right: 0;
+                top: 0;
+                white-space: nowrap;
+                opacity: 0;
+                transform: scale(0.7) rotate(-3deg);
+                transition: opacity 0.35s ease, transform 0.35s ease;
+                color: #facc15;
+                text-shadow: 0 0 12px #facc15, 0 0 25px #f59e0b, 0 0 45px #d97706, 0 0 65px rgba(217, 119, 6, 0.9);
+            }
+
+            .bengali-name.active-hover, .bengali-name:hover {
+                transform: scale(1.28) translateY(-4px);
+            }
+            .bengali-name.active-hover .text-bn, .bengali-name:hover .text-bn {
+                opacity: 0;
+                transform: scale(0.7) rotate(3deg);
+            }
+            .bengali-name.active-hover .text-or, .bengali-name:hover .text-or {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+
+            /* GLOWING BEVELED EASTER EGG BADGE FOR 'a.k.a RSNPIIT' -> 'a.k.a РСНПИИТ' */
             .aka-tag {
                 display: inline-flex;
                 align-items: center;
-                gap: 6px;
-                background: rgba(56, 189, 248, 0.12);
-                border: 1px solid rgba(56, 189, 248, 0.35);
+                justify-content: center;
+                background: linear-gradient(145deg, rgba(56, 189, 248, 0.20), rgba(2, 132, 199, 0.08));
+                border: 1px solid rgba(56, 189, 248, 0.5);
+                border-top: 1px solid rgba(255, 255, 255, 0.45);
+                border-bottom: 1px solid rgba(2, 132, 199, 0.7);
                 color: #94a3b8;
                 font-size: 0.88rem;
                 font-weight: 700;
                 letter-spacing: 2px;
                 text-transform: uppercase;
-                padding: 4px 14px;
+                padding: 6px 18px;
                 border-radius: 20px;
                 margin-top: 8px;
-                box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
+                box-shadow: 0 4px 16px rgba(56, 189, 248, 0.28), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+                position: relative;
+                cursor: pointer;
+                overflow: hidden;
+                white-space: nowrap;
+                transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             }
-            .aka-tag span {
+
+            .aka-tag .aka-bn-wrap {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+            .aka-tag .aka-bn-wrap span {
                 color: #38bdf8;
                 font-weight: 800;
+                text-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+            }
+
+            .aka-tag .aka-or-wrap {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) scale(0.85);
+                opacity: 0;
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+            .aka-tag .aka-or-wrap .cyrillic-highlight {
+                color: #f43f5e;
+                font-weight: 800;
+                text-shadow: 0 0 12px #f43f5e, 0 0 25px #e11d48;
+            }
+
+            .aka-tag.aka-hover, .aka-tag:hover {
+                transform: scale(1.09) translateY(-2px);
+                border-color: #38bdf8;
+                box-shadow: 0 6px 24px rgba(56, 189, 248, 0.55), 0 0 35px rgba(244, 63, 94, 0.45), inset 0 1px 3px rgba(255, 255, 255, 0.5);
+            }
+            .aka-tag.aka-hover .aka-bn-wrap, .aka-tag:hover .aka-bn-wrap {
+                opacity: 0;
+                transform: translateY(-16px) scale(0.85);
+            }
+            .aka-tag.aka-hover .aka-or-wrap, .aka-tag:hover .aka-or-wrap {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
             }
 
             .right-col {
@@ -380,8 +641,16 @@ if current_page == 'home':
             <div class="left-col">
                 <div class="small-tag">Hello! I'm</div>
                 <div class="main-name">RAMRUP<br>SATPATI</div>
-                <div class="bengali-name">রামরূপ সাতপতি</div>
-                <div><div class="aka-tag">a.k.a <span>RSNPIIT</span></div></div>
+                <div class="bengali-name" id="bengaliNameBox">
+                    <span class="text-bn">রামরূপ সাতপতি</span>
+                    <span class="text-or">ରାମରୂପ ସତପତି</span>
+                </div>
+                <div>
+                    <div class="aka-tag" id="akaTagBox">
+                        <span class="aka-bn-wrap">a.k.a <span>RSNPIIT</span></span>
+                        <span class="aka-or-wrap">a.k.a <span class="cyrillic-highlight">РСНПИИТ</span></span>
+                    </div>
+                </div>
             </div>
             <div></div>
             <div class="right-col">
@@ -485,10 +754,63 @@ if current_page == 'home':
 
                 let mouseX = 0, mouseY = 0;
                 let targetX = 0, targetY = 0;
+                const nameBox = document.getElementById('bengaliNameBox');
+                const akaTagBox = document.getElementById('akaTagBox');
+
+                // Target Colors for Smooth Lerp Transition
+                let targetInnerColor = new THREE.Color(0x0284c7);
+                let targetOuterColor = new THREE.Color(0x38bdf8);
+                let targetParticleColor = new THREE.Color(0xfacc15);
+                let lastColorShiftTime = 0;
 
                 window.addEventListener('mousemove', (e) => {
                     mouseX = (e.clientX / window.innerWidth - 0.5) * 1.5;
                     mouseY = (e.clientY / window.innerHeight - 0.5) * 1.5;
+
+                    // Name Box Proximity
+                    if (nameBox) {
+                        const rect = nameBox.getBoundingClientRect();
+                        const centerX = rect.left + rect.width / 2;
+                        const centerY = rect.top + rect.height / 2;
+                        const dist = Math.hypot(e.clientX - centerX, e.clientY - centerY);
+                        if (dist < 150) {
+                            nameBox.classList.add('active-hover');
+                        } else {
+                            nameBox.classList.remove('active-hover');
+                        }
+                    }
+
+                    // AKA Tag Proximity Easter Egg
+                    if (akaTagBox) {
+                        const rect = akaTagBox.getBoundingClientRect();
+                        const centerX = rect.left + rect.width / 2;
+                        const centerY = rect.top + rect.height / 2;
+                        const dist = Math.hypot(e.clientX - centerX, e.clientY - centerY);
+                        if (dist < 120) {
+                            akaTagBox.classList.add('aka-hover');
+                        } else {
+                            akaTagBox.classList.remove('aka-hover');
+                        }
+                    }
+
+                    // 3D Core Globe Mouse Proximity (230px Radius)
+                    const globeCenterX = window.innerWidth / 2;
+                    const globeCenterY = window.innerHeight / 2;
+                    const distToGlobe = Math.hypot(e.clientX - globeCenterX, e.clientY - globeCenterY);
+
+                    if (distToGlobe < 230) {
+                        const now = Date.now();
+                        if (now - lastColorShiftTime > 350) {
+                            lastColorShiftTime = now;
+                            targetInnerColor = new THREE.Color(Math.random(), Math.random(), Math.random());
+                            targetOuterColor = new THREE.Color(Math.random(), Math.random(), Math.random());
+                            targetParticleColor = new THREE.Color(Math.random(), Math.random(), Math.random());
+                        }
+                    } else {
+                        targetInnerColor.setHex(0x0284c7);
+                        targetOuterColor.setHex(0x38bdf8);
+                        targetParticleColor.setHex(0xfacc15);
+                    }
                 });
 
                 window.addEventListener('resize', () => {
@@ -515,6 +837,14 @@ if current_page == 'home':
                     coreGroup.rotation.y = targetX;
                     coreGroup.rotation.x = targetY;
 
+                    // Smooth Lerp Color Shift on Proximity
+                    innerMat.color.lerp(targetInnerColor, 0.08);
+                    innerMat.emissive.lerp(targetInnerColor, 0.08);
+                    outerMat.color.lerp(targetOuterColor, 0.08);
+                    particleMat.color.lerp(targetParticleColor, 0.08);
+                    cyanLight.color.lerp(targetOuterColor, 0.08);
+                    roseLight.color.lerp(targetInnerColor, 0.08);
+
                     renderer.render(scene, camera);
                 }
                 animate();
@@ -526,20 +856,209 @@ if current_page == 'home':
     
     components.html(cyber_core_html, height=420, scrolling=False)
 
-    # Section Header
+    # Section Header with Fast Word-by-Word Staggered Reveal Animation
     st.markdown("""
-    <div style="text-align: center; margin-top: 15px; margin-bottom: 30px;">
-        <h2 style="font-size: 2.3rem; font-weight: 800; color: #ffffff;">What I Bring to the Table</h2>
-        <p style="color: #94a3b8; font-size: 1.05rem;">Why Choose Me — Select an ecosystem below to explore repositories & applications</p>
+    <div class="section-header-wrapper">
+        <h2 class="stagger-words-h2">
+            <span>What</span> <span>I</span> <span>Bring</span> <span>to</span> <span>the</span> <span>Table</span>
+        </h2>
+        <p class="stagger-words-p">
+            <span>Why</span> <span>Choose</span> <span>Me</span> <span>—</span> 
+            <span>Select</span> <span>an</span> <span>ecosystem</span> <span>below</span> 
+            <span>to</span> <span>explore</span> <span>repositories</span> <span>&</span> <span>applications</span>
+        </p>
     </div>
     """, unsafe_allow_html=True)
 
+    # Dynamic Cosmic Canvas: Falling Asteroids & Supernova Star Explosions
+    cards_cosmic_background_html = """
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body { background: transparent; overflow: hidden; width: 100vw; height: 180px; position: relative; }
+            canvas { width: 100%; height: 100%; display: block; }
+        </style>
+    </head>
+    <body>
+        <canvas id="cosmicCanvas"></canvas>
+        <script>
+            const canvas = document.getElementById('cosmicCanvas');
+            const ctx = canvas.getContext('2d');
+            let w = canvas.width = window.innerWidth;
+            let h = canvas.height = 180;
+
+            window.addEventListener('resize', () => {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = 180;
+            });
+
+            // 1. Shooting Asteroids / Comets
+            class Asteroid {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    this.x = Math.random() * (w + 300) - 100;
+                    this.y = -40;
+                    this.length = Math.random() * 140 + 90;
+                    this.speed = Math.random() * 7 + 5;
+                    this.angle = Math.PI / 4 + (Math.random() - 0.5) * 0.25;
+                    this.size = Math.random() * 2.5 + 1.5;
+                    const colors = ['#38bdf8', '#fb923c', '#facc15', '#34d399', '#f43f5e'];
+                    this.color = colors[Math.floor(Math.random() * colors.length)];
+                }
+                update() {
+                    this.x -= Math.cos(this.angle) * this.speed;
+                    this.y += Math.sin(this.angle) * this.speed;
+                    if (this.x < -150 || this.y > h + 150) {
+                        this.reset();
+                    }
+                }
+                draw() {
+                    ctx.save();
+                    const tailX = this.x + Math.cos(this.angle) * this.length;
+                    const tailY = this.y - Math.sin(this.angle) * this.length;
+                    
+                    const grad = ctx.createLinearGradient(this.x, this.y, tailX, tailY);
+                    grad.addColorStop(0, this.color);
+                    grad.addColorStop(0.4, this.color);
+                    grad.addColorStop(1, 'transparent');
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(this.x, this.y);
+                    ctx.lineTo(tailX, tailY);
+                    ctx.strokeStyle = grad;
+                    ctx.lineWidth = this.size;
+                    ctx.lineCap = 'round';
+                    ctx.stroke();
+
+                    // Blazing Head
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size * 1.6, 0, Math.PI * 2);
+                    ctx.fillStyle = '#ffffff';
+                    ctx.shadowBlur = 16;
+                    ctx.shadowColor = this.color;
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
+
+            // 2. Supernova Star Explosions
+            class Supernova {
+                constructor(x, y, color) {
+                    this.x = x;
+                    this.y = y;
+                    this.color = color;
+                    this.particles = [];
+                    const particleCount = 50;
+                    for (let i = 0; i < particleCount; i++) {
+                        const angle = Math.random() * Math.PI * 2;
+                        const speed = Math.random() * 4.5 + 1.2;
+                        this.particles.push({
+                            x: this.x,
+                            y: this.y,
+                            vx: Math.cos(angle) * speed,
+                            vy: Math.sin(angle) * speed,
+                            size: Math.random() * 3 + 1,
+                            alpha: 1.0,
+                            decay: Math.random() * 0.02 + 0.015
+                        });
+                    }
+                }
+                update() {
+                    this.particles.forEach(p => {
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        p.alpha -= p.decay;
+                    });
+                }
+                draw() {
+                    this.particles.forEach(p => {
+                        if (p.alpha > 0) {
+                            ctx.save();
+                            ctx.beginPath();
+                            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                            ctx.fillStyle = p.alpha > 0.5 ? '#ffffff' : this.color;
+                            ctx.shadowBlur = 12;
+                            ctx.shadowColor = this.color;
+                            ctx.globalAlpha = p.alpha;
+                            ctx.fill();
+                            ctx.restore();
+                        }
+                    });
+                }
+                isFinished() {
+                    return this.particles.every(p => p.alpha <= 0);
+                }
+            }
+
+            const asteroids = Array.from({ length: 6 }, () => new Asteroid());
+            let supernovas = [];
+
+            // Trigger Supernova explosions behind cards periodically
+            let lastExplosion = 0;
+            function triggerRandomSupernova(time) {
+                if (time - lastExplosion > 1800) {
+                    lastExplosion = time;
+                    const cardPositions = [
+                        { x: w * 0.18, color: '#38bdf8' }, // Python Cyan
+                        { x: w * 0.50, color: '#fb923c' }, // Rust Orange
+                        { x: w * 0.82, color: '#34d399' }  // Vue Emerald
+                    ];
+                    const pos = cardPositions[Math.floor(Math.random() * cardPositions.length)];
+                    const spawnY = Math.random() * (h - 40) + 20;
+                    supernovas.push(new Supernova(pos.x, spawnY, pos.color));
+                }
+            }
+
+            // Interactive Mouse Explosions
+            window.addEventListener('mousemove', (e) => {
+                if (Math.random() > 0.6) {
+                    const colors = ['#38bdf8', '#fb923c', '#facc15', '#34d399'];
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    supernovas.push(new Supernova(e.clientX, e.clientY, color));
+                }
+            });
+
+            function animate(time) {
+                ctx.clearRect(0, 0, w, h);
+
+                // Update & Draw Asteroids
+                asteroids.forEach(a => {
+                    a.update();
+                    a.draw();
+                });
+
+                // Periodic Supernovas
+                triggerRandomSupernova(time);
+
+                // Update & Draw Supernovas
+                supernovas.forEach((s, idx) => {
+                    s.update();
+                    s.draw();
+                    if (s.isFinished()) {
+                        supernovas.splice(idx, 1);
+                    }
+                });
+
+                requestAnimationFrame(animate);
+            }
+            requestAnimationFrame(animate);
+        </script>
+    </body>
+    </html>
+    """
+    components.html(cards_cosmic_background_html, height=180, scrolling=False)
+
     c1, c2, c3 = st.columns(3, gap="large")
 
-    # CARD 1: PYTHON
+    # CARD 1: PYTHON (ANIMATED CYAN ENERGY GLOW BACKGROUND)
     with c1:
         st.markdown("""
-        <div class="giant-card">
+        <div class="giant-card python-glow-card">
             <div class="card-icon-wrapper">
                 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" class="card-icon-img" alt="Python">
             </div>
@@ -553,10 +1072,10 @@ if current_page == 'home':
             set_page('python')
             st.rerun()
 
-    # CARD 2: RUST (CRISP RELIABLE LOGO)
+    # CARD 2: RUST (ANIMATED ORANGE FLAME ENERGY GLOW BACKGROUND)
     with c2:
         st.markdown("""
-        <div class="giant-card">
+        <div class="giant-card rust-glow-card">
             <div class="card-icon-wrapper">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Rust_programming_language_black_logo.svg" class="card-icon-img" style="filter: invert(1);" alt="Rust">
             </div>
@@ -570,10 +1089,10 @@ if current_page == 'home':
             set_page('rust')
             st.rerun()
 
-    # CARD 3: VUE
+    # CARD 3: VUE (ANIMATED EMERALD MATRIX ENERGY GLOW BACKGROUND)
     with c3:
         st.markdown("""
-        <div class="giant-card">
+        <div class="giant-card vue-glow-card">
             <div class="card-icon-wrapper">
                 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original.svg" class="card-icon-img" alt="Vue.js">
             </div>
@@ -587,113 +1106,138 @@ if current_page == 'home':
             set_page('vue')
             st.rerun()
 
-    # Bottom Animation Canvas: Swaying Coastal Palm Trees + Rising Particles
-    bottom_palm_html = """
+    # Bottom Animation Canvas: Interactive Cyber Grid Horizon & Floating Tech Matrix
+    bottom_cyber_html = """
     <!DOCTYPE html>
     <html>
     <head>
+        <meta charset="utf-8">
         <style>
             * { margin: 0; padding: 0; box-sizing: border-box; }
-            body { background: transparent; overflow: hidden; width: 100vw; height: 130px; }
+            body { background: transparent; overflow: hidden; width: 100vw; height: 160px; position: relative; }
             canvas { width: 100%; height: 100%; display: block; }
         </style>
     </head>
     <body>
-        <canvas id="palmCanvas"></canvas>
+        <canvas id="cyberCanvas"></canvas>
         <script>
-            const canvas = document.getElementById('palmCanvas');
+            const canvas = document.getElementById('cyberCanvas');
             const ctx = canvas.getContext('2d');
             let w = canvas.width = window.innerWidth;
-            let h = canvas.height = 130;
+            let h = canvas.height = 160;
 
             window.addEventListener('resize', () => {
                 w = canvas.width = window.innerWidth;
-                h = canvas.height = 130;
+                h = canvas.height = 160;
             });
 
-            // Particles
-            const embers = [];
-            for (let i = 0; i < 45; i++) {
-                embers.push({
+            // Floating Tech Badges / Glyphs
+            const badges = [
+                { text: '🐍 Python & AI/ML', x: w * 0.12, y: 140, speed: 0.35, alpha: 0.85, scale: 0.95 },
+                { text: '🦀 Rust Systems', x: w * 0.32, y: 150, speed: 0.42, alpha: 0.88, scale: 1.0 },
+                { text: '⚡ Vue.js Frontend', x: w * 0.58, y: 135, speed: 0.38, alpha: 0.88, scale: 1.0 },
+                { text: '🧠 PyTorch & GenAI', x: w * 0.78, y: 145, speed: 0.32, alpha: 0.78, scale: 0.9 },
+                { text: '🛡️ Memory Safety', x: w * 0.45, y: 155, speed: 0.48, alpha: 0.75, scale: 0.85 },
+            ];
+
+            // Cyber Energy Particles
+            const particles = [];
+            for(let i = 0; i < 55; i++) {
+                particles.push({
                     x: Math.random() * w,
                     y: Math.random() * h,
-                    size: Math.random() * 2.2 + 1,
-                    vy: -(Math.random() * 0.7 + 0.3),
-                    vx: (Math.random() - 0.5) * 0.4,
-                    alpha: Math.random() * 0.7 + 0.2
+                    size: Math.random() * 2.5 + 1.2,
+                    speedY: -(Math.random() * 0.6 + 0.3),
+                    speedX: (Math.random() - 0.5) * 0.4,
+                    hue: Math.random() > 0.5 ? 199 : (Math.random() > 0.5 ? 25 : 155),
+                    alpha: Math.random() * 0.8 + 0.2
                 });
             }
 
-            function drawPalmTree(x, height, angleSway, scale = 1.0) {
+            let mouseX = w / 2;
+            window.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+            });
+
+            function drawHorizonGrid(time) {
+                // Top Horizon Ambient Glow
+                const grad = ctx.createLinearGradient(0, 0, 0, h);
+                grad.addColorStop(0, 'rgba(7, 10, 19, 0)');
+                grad.addColorStop(0.4, 'rgba(14, 165, 233, 0.06)');
+                grad.addColorStop(1, 'rgba(56, 189, 248, 0.16)');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, w, h);
+
+                // Perspective Cyber Grid
                 ctx.save();
-                ctx.translate(x, h);
-                ctx.scale(scale, scale);
+                ctx.strokeStyle = 'rgba(56, 189, 248, 0.14)';
+                ctx.lineWidth = 1;
 
-                ctx.beginPath();
-                ctx.moveTo(0, 0);
-                const controlX = angleSway * 18;
-                ctx.quadraticCurveTo(controlX, -height * 0.5, angleSway * 25, -height);
-                ctx.lineWidth = 7;
-                ctx.strokeStyle = '#0f2942';
-                ctx.lineCap = 'round';
-                ctx.stroke();
-
-                ctx.lineWidth = 3;
-                ctx.strokeStyle = '#0284c7';
-                ctx.stroke();
-
-                const topX = angleSway * 25;
-                const topY = -height;
-                const leafAngles = [-0.8, -0.4, 0, 0.4, 0.8, -1.1, 1.1];
-
-                leafAngles.forEach((baseAngle, idx) => {
-                    ctx.save();
-                    ctx.translate(topX, topY);
-                    const finalAngle = baseAngle + angleSway * 0.4 + Math.sin(Date.now() * 0.002 + idx) * 0.05;
-                    ctx.rotate(finalAngle);
-
+                // Horizontal Perspective Lines
+                for(let y = 15; y < h; y += 20) {
                     ctx.beginPath();
-                    ctx.moveTo(0, 0);
-                    ctx.quadraticCurveTo(25, -15, 55, 10);
-                    ctx.lineWidth = 3.5;
-                    ctx.strokeStyle = idx % 2 === 0 ? '#38bdf8' : '#0284c7';
+                    ctx.moveTo(0, y);
+                    ctx.lineTo(w, y);
                     ctx.stroke();
-                    ctx.restore();
-                });
+                }
 
+                // Perspective Vanishing Lines Toward Dynamic Center
+                const horizonY = 5;
+                const centerX = w / 2 + (mouseX - w/2) * 0.06;
+                const lineCount = 32;
+                for(let i = -lineCount/2; i <= lineCount/2; i++) {
+                    const startX = centerX + (i * 48);
+                    ctx.beginPath();
+                    ctx.moveTo(centerX, horizonY);
+                    ctx.lineTo(startX, h);
+                    ctx.strokeStyle = `rgba(56, 189, 248, ${0.06 + (1 - Math.abs(i)/(lineCount/2)) * 0.10})`;
+                    ctx.stroke();
+                }
                 ctx.restore();
             }
 
             function animate(time) {
                 ctx.clearRect(0, 0, w, h);
 
-                embers.forEach(p => {
-                    p.y += p.vy;
-                    p.x += p.vx;
-                    p.alpha -= 0.003;
+                // 1. Draw Perspective Grid
+                drawHorizonGrid(time);
+
+                // 2. Rising Cyber Embers
+                particles.forEach(p => {
+                    p.y += p.speedY;
+                    p.x += p.speedX;
+                    p.alpha -= 0.0025;
                     if (p.y < 0 || p.alpha <= 0) {
                         p.x = Math.random() * w;
                         p.y = h;
-                        p.alpha = Math.random() * 0.7 + 0.3;
+                        p.alpha = Math.random() * 0.8 + 0.2;
                     }
                     ctx.save();
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(56, 189, 248, ${p.alpha})`;
-                    ctx.shadowBlur = 8;
-                    ctx.shadowColor = '#38bdf8';
+                    ctx.fillStyle = `hsla(${p.hue}, 90%, 65%, ${p.alpha})`;
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = `hsla(${p.hue}, 90%, 65%, 0.8)`;
                     ctx.fill();
                     ctx.restore();
                 });
 
-                const sway1 = Math.sin(time * 0.0018) * 0.8;
-                const sway2 = Math.sin(time * 0.0022 + 1) * 0.7;
-
-                drawPalmTree(60, 95, sway1, 0.9);
-                drawPalmTree(120, 110, sway2, 1.05);
-
-                drawPalmTree(w - 120, 110, sway1, 1.05);
-                drawPalmTree(w - 60, 95, sway2, 0.9);
+                // 3. Floating Tech Glyphs
+                badges.forEach(b => {
+                    b.y -= b.speed;
+                    b.x += Math.sin(time * 0.0018 + b.y * 0.04) * 0.35;
+                    if (b.y < -20) {
+                        b.y = h + 20;
+                        b.x = Math.random() * (w - 120) + 60;
+                    }
+                    ctx.save();
+                    ctx.font = `600 ${13 * b.scale}px 'Plus Jakarta Sans', sans-serif`;
+                    ctx.fillStyle = `rgba(255, 255, 255, ${b.alpha * 0.85})`;
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = 'rgba(56, 189, 248, 0.6)';
+                    ctx.fillText(b.text, b.x, b.y);
+                    ctx.restore();
+                });
 
                 requestAnimationFrame(animate);
             }
@@ -702,7 +1246,7 @@ if current_page == 'home':
     </body>
     </html>
     """
-    components.html(bottom_palm_html, height=130, scrolling=False)
+    components.html(bottom_cyber_html, height=160, scrolling=False)
 
 # -----------------------------------------------------------------------------
 # PAGE 2: PYTHON REPOSITORIES VIEW
