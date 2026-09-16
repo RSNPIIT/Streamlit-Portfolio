@@ -1414,31 +1414,38 @@ if current_page == 'home':
             }
 
             .solid-bevel-tag .morph-wrap {
-                display: inline-block;
+                display: inline-flex;
+                align-items: center;
                 position: relative;
             }
 
             .solid-bevel-tag .text-learning {
+                position: relative;
                 display: inline-block;
                 color: #38bdf8;
                 text-shadow: 0 0 12px rgba(56, 189, 248, 0.85);
-                transition: opacity 0.35s ease, transform 0.35s ease;
+                transition: opacity 0.32s ease, transform 0.32s ease;
+                opacity: 1;
             }
 
             .solid-bevel-tag .text-opensource {
                 position: absolute;
                 left: 0;
-                top: 0;
+                top: 50%;
+                transform: translateY(-50%) scale(0.82);
                 white-space: nowrap;
                 opacity: 0;
-                transform: scale(0.78) translateY(6px);
                 color: #34d399;
+                font-size: 1.05rem;
+                font-weight: 800;
+                letter-spacing: 0.6px;
                 text-shadow: 0 0 14px #34d399, 0 0 28px #10b981;
-                transition: opacity 0.35s ease, transform 0.35s ease;
+                transition: opacity 0.32s ease, transform 0.32s ease;
+                pointer-events: none;
             }
 
             .solid-bevel-tag.bevel-hover, .solid-bevel-tag:hover {
-                transform: scale(1.12) translateY(-3px);
+                transform: scale(1.1) translateY(-3px);
                 border-color: #38bdf8;
                 border-top-color: #ffffff;
                 box-shadow: 0 12px 35px rgba(56, 189, 248, 0.6), 0 0 38px rgba(52, 211, 153, 0.5), inset 0 1px 4px rgba(255, 255, 255, 0.65);
@@ -1446,12 +1453,18 @@ if current_page == 'home':
 
             .solid-bevel-tag.bevel-hover .text-learning, .solid-bevel-tag:hover .text-learning {
                 opacity: 0;
-                transform: scale(0.78) translateY(-6px);
+                transform: scale(0.8) translateY(-8px);
+                position: absolute;
+                pointer-events: none;
             }
 
             .solid-bevel-tag.bevel-hover .text-opensource, .solid-bevel-tag:hover .text-opensource {
                 opacity: 1;
+                position: relative;
+                top: auto;
+                left: auto;
                 transform: scale(1) translateY(0);
+                pointer-events: auto;
             }
         </style>
     </head>
