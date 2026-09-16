@@ -627,7 +627,7 @@ if current_page == 'home':
             .role-tag { color: #94a3b8; font-size: 1.2rem; font-weight: 600; margin-bottom: 2px; }
             .role-highlight { font-size: 2.5rem; font-weight: 900; line-height: 1.08; background: linear-gradient(135deg, #38bdf8, #06b6d4, #f43f5e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-            /* GLOWING CALLIGRAPHY SCRIPT FOR 'Jack of all Trades' */
+            /* GLOWING CALLIGRAPHY SCRIPT FOR 'Jack of all Trades' -> 'সর্বকাজে দক্ষ ব্যক্তি' */
             .sub-tagline {
                 font-family: 'Great Vibes', 'Caveat', cursive;
                 font-size: 2.4rem;
@@ -639,6 +639,41 @@ if current_page == 'home':
                 text-shadow: 0 0 15px rgba(250, 204, 21, 0.7), 0 0 30px rgba(245, 158, 11, 0.4);
                 transform: rotate(-2deg);
                 display: inline-block;
+                position: relative;
+                cursor: pointer;
+                transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            }
+
+            .sub-tagline .text-en {
+                display: inline-block;
+                transition: opacity 0.35s ease, transform 0.35s ease;
+            }
+
+            .sub-tagline .text-bn {
+                position: absolute;
+                left: 0;
+                top: 0;
+                white-space: nowrap;
+                opacity: 0;
+                transform: scale(0.7) rotate(-3deg);
+                transition: opacity 0.35s ease, transform 0.35s ease;
+                font-family: 'Hind Siliguri', sans-serif;
+                color: #38bdf8;
+                text-shadow: 0 0 12px #38bdf8, 0 0 25px #0284c7, 0 0 45px rgba(2, 132, 199, 0.9);
+            }
+
+            .sub-tagline.active-hover, .sub-tagline:hover {
+                transform: scale(1.18) rotate(0deg) translateY(-3px);
+            }
+
+            .sub-tagline.active-hover .text-en, .sub-tagline:hover .text-en {
+                opacity: 0;
+                transform: scale(0.7) rotate(3deg);
+            }
+
+            .sub-tagline.active-hover .text-bn, .sub-tagline:hover .text-bn {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
             }
         </style>
     </head>
@@ -665,7 +700,10 @@ if current_page == 'home':
             <div class="right-col">
                 <div class="role-tag">A Full Stack</div>
                 <div class="role-highlight">SYSTEMS & AI<br>ENGINEER</div>
-                <div class="sub-tagline">Jack of all Trades</div>
+                <div class="sub-tagline" id="taglineBox">
+                    <span class="text-en">Jack of all Trades</span>
+                    <span class="text-bn">সর্বকাজে দক্ষ ব্যক্তি</span>
+                </div>
             </div>
         </div>
 
@@ -765,6 +803,7 @@ if current_page == 'home':
                 let targetX = 0, targetY = 0;
                 const nameBox = document.getElementById('bengaliNameBox');
                 const akaTagBox = document.getElementById('akaTagBox');
+                const taglineBox = document.getElementById('taglineBox');
 
                 // Target Colors for Smooth Lerp Transition
                 let targetInnerColor = new THREE.Color(0x0284c7);
@@ -799,6 +838,19 @@ if current_page == 'home':
                             akaTagBox.classList.add('aka-hover');
                         } else {
                             akaTagBox.classList.remove('aka-hover');
+                        }
+                    }
+
+                    // Sub-tagline Proximity (Jack of all Trades -> সর্বকাজে দক্ষ ব্যক্তি)
+                    if (taglineBox) {
+                        const rect = taglineBox.getBoundingClientRect();
+                        const centerX = rect.left + rect.width / 2;
+                        const centerY = rect.top + rect.height / 2;
+                        const dist = Math.hypot(e.clientX - centerX, e.clientY - centerY);
+                        if (dist < 150) {
+                            taglineBox.classList.add('active-hover');
+                        } else {
+                            taglineBox.classList.remove('active-hover');
                         }
                     }
 
